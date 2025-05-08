@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 245, 245, 245;
+  --primary-color: #2563EB;
+  --secondary-color: #0F172A;
+  --accent-color: #4F46E5;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      rgb(var(--background-start-rgb)),
+      rgb(var(--background-end-rgb))
+    );
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@layer components {
+  .section-heading {
+    @apply text-4xl font-bold mb-8 text-center relative;
+  }
+  
+  .section-heading::after {
+    content: '';
+    @apply absolute left-1/2 -translate-x-1/2 bottom-0 w-16 h-1 bg-blue-600 rounded-full mt-2;
+  }
+  
+  .btn {
+    @apply px-6 py-3 rounded-lg font-medium transition-colors duration-300;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white;
+  }
+
+  .project-card {
+    @apply w-full bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300;
+  }
+
+  .project-image {
+    @apply w-full h-64 object-cover object-top;
+  }
+
+  .project-content {
+    @apply p-6;
+  }
+}
