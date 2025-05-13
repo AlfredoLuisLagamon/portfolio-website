@@ -153,7 +153,7 @@ const AnimatedHero = () => {
             </motion.div>
 
             {/* Technology badges */}
-            <motion.div
+            {/* <motion.div
               className="mt-8 flex flex-wrap gap-3"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -177,7 +177,7 @@ const AnimatedHero = () => {
                   {tech}
                 </motion.div>
               ))}
-            </motion.div>
+            </motion.div> */}
           </motion.div>
 
           <motion.div

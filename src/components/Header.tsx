@@ -74,7 +74,6 @@ const Header = () => {
           </span>
           <span className="text-gray-800">.dev</span>
         </motion.a>
-
         {/* Desktop Navigation */}
         <nav className="hidden md:block">
           <ul className="flex gap-8">
@@ -101,8 +100,7 @@ const Header = () => {
               </motion.li>
             ))}
           </ul>
-        </nav>
-
+        </nav>{" "}
         {/* Mobile menu button */}
         <div className="md:hidden">
           <motion.button
@@ -111,25 +109,29 @@ const Header = () => {
             whileTap={{ scale: 0.9 }}
             aria-label="Toggle menu"
           >
-            <div className="w-6 h-5 flex flex-col justify-between">
+            <div className="w-6 h-5 flex flex-col justify-between relative">
               <motion.span
                 animate={
-                  mobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }
+                  mobileMenuOpen
+                    ? { rotate: 45, y: 9, width: "100%" }
+                    : { rotate: 0, y: 0 }
                 }
                 transition={{ duration: 0.3 }}
-                className="w-full h-0.5 bg-gray-800 origin-left"
+                className="w-full h-0.5 bg-gray-800 absolute top-0 left-0 origin-center"
               />
               <motion.span
                 animate={{ opacity: mobileMenuOpen ? 0 : 1 }}
-                transition={{ duration: 0.3 }}
-                className="w-full h-0.5 bg-gray-800"
+                transition={{ duration: 0.2 }}
+                className="w-full h-0.5 bg-gray-800 absolute top-1/2 -translate-y-1/2"
               />
               <motion.span
                 animate={
-                  mobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }
+                  mobileMenuOpen
+                    ? { rotate: -45, y: -9, width: "100%" }
+                    : { rotate: 0, y: 0 }
                 }
                 transition={{ duration: 0.3 }}
-                className="w-full h-0.5 bg-gray-800 origin-left"
+                className="w-full h-0.5 bg-gray-800 absolute bottom-0 left-0 origin-center"
               />
             </div>
           </motion.button>

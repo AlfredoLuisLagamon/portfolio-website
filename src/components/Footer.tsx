@@ -108,22 +108,17 @@ const Footer = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+              {/* Get In Touch section */}
               <motion.div
                 className="bg-gray-800/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-gray-700"
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
-                }}
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{
                   duration: 0.6,
                   delay: 0.3,
-                  hover: { y: -5, duration: 0.15 },
                 }}
               >
-                {/* Get In Touch section */}
                 <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
                   Get In Touch
                 </h3>
@@ -209,17 +204,12 @@ const Footer = () => {
 
               <motion.div
                 className="bg-gray-800/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-gray-700"
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
-                }}
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{
                   duration: 0.6,
                   delay: 0.4,
-                  hover: { y: -5, duration: 0.15 },
                 }}
               >
                 <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">

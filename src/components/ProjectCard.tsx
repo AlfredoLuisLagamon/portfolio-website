@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import Image from "next/image";
 
 interface ProjectCardProps {
   title: string;
@@ -21,38 +21,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   imageAlt,
   onClick,
 }) => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  // Animation variants
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
-    <motion.div
-      ref={ref}
-      variants={cardVariants}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
+    <div
       className="project-card group h-full flex flex-col bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl dark:shadow-gray-900/30 cursor-pointer"
       onClick={onClick}
     >
+      {" "}
       <div className="relative overflow-hidden">
         <div className="h-60 sm:h-64 overflow-hidden">
-          <img
+          <Image
             src={imageSrc}
             alt={imageAlt}
+            width={400}
+            height={240}
+            quality={80}
             className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
           />
 
@@ -68,7 +50,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </div>
       </div>
-
       <div className="p-6 flex-1 flex flex-col">
         <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
           {title}
@@ -100,7 +81,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

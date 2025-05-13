@@ -21,13 +21,28 @@ const ProjectsSection: React.FC = () => {
   const handleCloseModal = () => {
     setSelectedProject(null);
   };
-
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
+        delayChildren: 0.3,
+        duration: 0.5,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const projectVariant = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
       },
     },
   };
@@ -53,7 +68,6 @@ const ProjectsSection: React.FC = () => {
             My Projects
           </motion.h2>
         </div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,8 +78,7 @@ const ProjectsSection: React.FC = () => {
             Check out some of my recent work. These projects showcase my skills
             in front-end web development, UI/UX design, and problem-solving.
           </p>
-        </motion.div>
-
+        </motion.div>{" "}
         <motion.div
           ref={ref}
           initial="hidden"
@@ -74,20 +87,25 @@ const ProjectsSection: React.FC = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {projects.map((project, index) => (
-            <ProjectCard
+            <motion.div
               key={index}
-              title={project.title}
-              description={project.description}
-              technologies={project.technologies}
-              imageSrc={project.images[0]}
-              imageAlt={`${project.title} screenshot`}
-              projectUrl={project.projectUrl}
-              githubUrl={project.githubUrl}
-              onClick={() => handleProjectClick(project)}
-            />
+              variants={projectVariant}
+              whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <ProjectCard
+                title={project.title}
+                description={project.description}
+                technologies={project.technologies}
+                imageSrc={project.images[0]}
+                imageAlt={`${project.title} screenshot`}
+                projectUrl={project.projectUrl}
+                githubUrl={project.githubUrl}
+                onClick={() => handleProjectClick(project)}
+              />
+            </motion.div>
           ))}
         </motion.div>
-
         {/* View all projects button */}
         {/* <motion.div 
           className="mt-16 flex justify-center"

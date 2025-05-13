@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import ProfileImage from "./ProfileImage";
 
 const AboutSection = () => {
   const [ref, inView] = useInView({
@@ -119,7 +120,7 @@ const AboutSection = () => {
           variants={staggerContainer}
           className="max-w-6xl mx-auto grid gap-12 md:gap-16 lg:grid-cols-2 items-start"
         >
-          {/* Who I Am */}
+          {/* Who I Am */}{" "}
           <motion.div variants={fadeInUp}>
             <motion.div
               className="flex items-center space-x-3 mb-6"
@@ -129,7 +130,9 @@ const AboutSection = () => {
               <h2 className="text-3xl font-bold text-gray-800">Who I Am</h2>
             </motion.div>
 
-            <div className="space-y-5 text-gray-700 leading-relaxed">
+            <ProfileImage className="w-40 h-40 float-right ml-6 mb-4 md:hidden" />
+
+            <div className="space-y-5 text-gray-700 leading-relaxed mb-6 md:mb-0">
               <motion.p variants={fadeInUp} className="text-lg">
                 I'm Alfred, a front-end developer passionate about building
                 clean, responsive, and engaging user interfaces. I specialize in
@@ -143,7 +146,7 @@ const AboutSection = () => {
               <motion.p variants={fadeInUp}>
                 My journey into front-end development started with curiosity and
                 a love for creating things that just work—and work well. Over
-                time, I’ve expanded my skill set through tools like TypeScript,
+                time, I've expanded my skill set through tools like TypeScript,
                 Next.js, Tailwind CSS, and Vite, while also diving into design
                 systems, animation libraries, and performance optimization. I
                 enjoy solving UI problems, improving layout responsiveness, and
@@ -155,12 +158,12 @@ const AboutSection = () => {
                 consistency, and seamless collaboration. I enjoy working closely
                 with designers, product teams, and fellow developers to turn
                 ideas into well-built, user-focused interfaces. For me, great
-                front-end development isn’t just about writing code—it’s about
+                front-end development isn't just about writing code—it's about
                 building digital experiences that feel effortless, perform
                 smoothly, and leave a lasting impression.
               </motion.p>
 
-              <motion.div variants={fadeInUp} className="pt-4">
+              <motion.div variants={fadeInUp} className="pt-4 hidden md:block">
                 <a
                   href="#contact"
                   className="inline-flex items-center text-blue-600 font-medium hover:text-blue-700 group"
@@ -173,7 +176,6 @@ const AboutSection = () => {
               </motion.div>
             </div>
           </motion.div>
-
           {/* My Skills */}
           <motion.div variants={fadeInUp}>
             <motion.div

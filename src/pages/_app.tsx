@@ -4,10 +4,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import Head from "next/head";
 import { useEffect } from "react";
 import ScrollAnimator from "../utils/ScrollAnimator";
+import { inter } from "../utils/fonts";
+import { initPerformanceOptimizations } from "../utils/performance";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   // Initialize scroll animations
   useEffect(() => {
+    // Initialize performance optimizations
+    initPerformanceOptimizations();
+
     // Initialize ScrollAnimator to add animations to elements with .reveal class
     ScrollAnimator.init();
 
@@ -46,7 +51,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   }, []);
 
   return (
-    <>
+    <div className={`${inter.variable} font-sans`}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
@@ -75,7 +80,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
           <Component {...pageProps} />
         </motion.div>
       </AnimatePresence>
-    </>
+    </div>
   );
 }
 

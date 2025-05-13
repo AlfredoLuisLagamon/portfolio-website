@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Project } from "../types/project";
 
 interface ProjectDetailsModalProps {
@@ -144,15 +145,18 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
                     exit="exit"
                     className="w-full h-full flex items-center justify-center"
                   >
+                    {" "}
                     {!imageError[currentImageIndex] ? (
-                      <img
+                      <Image
                         src={project.images[currentImageIndex]}
                         alt={`${project.title} screenshot ${
                           currentImageIndex + 1
                         }`}
-                        className="w-full h-full object-contain"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 80vw"
+                        className="object-contain"
                         onError={() => handleImageError(currentImageIndex)}
-                        loading="lazy"
+                        priority={currentImageIndex === 0}
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -182,7 +186,7 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
                   <>
                     <button
                       onClick={handlePrevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 text-gray-800 p-3 rounded-full shadow-lg hover:bg-white z-10 transition-colors"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/50 text-gray-800 p-3 rounded-full shadow-lg hover:bg-white z-10 transition-colors"
                       disabled={isImageChanging}
                       aria-label="Previous image"
                     >
@@ -202,7 +206,7 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
                     </button>
                     <button
                       onClick={handleNextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 text-gray-800 p-3 rounded-full shadow-lg hover:bg-white z-10 transition-colors"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/50 text-gray-800 p-3 rounded-full shadow-lg hover:bg-white z-10 transition-colors"
                       disabled={isImageChanging}
                       aria-label="Next image"
                     >
