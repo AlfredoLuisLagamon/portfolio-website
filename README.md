@@ -76,5 +76,5 @@ portfolio-website
 
 ## Author
 
-Alfredo Luis Lagamon
+Alfredo Luis Lagamon  
 https://github.com/AlfredoLuisLagamon
