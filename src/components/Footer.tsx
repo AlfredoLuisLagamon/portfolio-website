@@ -35,8 +35,8 @@ const Footer = () => {
         }}
       />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="py-20">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="py-12 sm:py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -44,25 +44,27 @@ const Footer = () => {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
+            <div className="text-center mb-8 sm:mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
                 Connect With Me
               </h2>
               <div className="h-1 w-20 bg-blue-500 mx-auto rounded-full"></div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-10 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 mb-8 sm:mb-12">
               <motion.div
-                className="bg-gray-800 p-8 rounded-xl shadow-lg"
+                className="bg-gray-800 p-4 sm:p-6 md:p-8 rounded-xl shadow-lg"
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.3 }}
               >
-                <h3 className="text-2xl font-bold mb-6">Get In Touch</h3>
-                <div className="space-y-6">
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4 shadow-lg shadow-blue-500/20">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
+                  Get In Touch
+                </h3>
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex flex-wrap items-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-3 sm:mr-4 shadow-lg shadow-blue-500/20 flex-shrink-0">
                       <svg
-                        className="w-6 h-6"
+                        className="w-5 h-5 sm:w-6 sm:h-6"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -70,21 +72,21 @@ const Footer = () => {
                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                       </svg>
                     </div>
-                    <div>
+                    <div className="flex-grow min-w-0">
                       <p className="text-sm text-gray-400">Email</p>
                       <a
                         href="mailto:alfredoluis.lagamon@gmail.com"
-                        className="text-blue-400 hover:text-blue-300 transition-colors hover:underline"
+                        className="text-blue-400 hover:text-blue-300 transition-colors hover:underline break-words"
                       >
                         alfredoluis.lagamon@gmail.com
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4 shadow-lg shadow-blue-500/20">
+                  <div className="flex flex-wrap items-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-3 sm:mr-4 shadow-lg shadow-blue-500/20 flex-shrink-0">
                       <svg
-                        className="w-6 h-6"
+                        className="w-5 h-5 sm:w-6 sm:h-6"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -104,21 +106,23 @@ const Footer = () => {
               </motion.div>
 
               <motion.div
-                className="bg-gray-800 p-8 rounded-xl shadow-lg"
+                className="bg-gray-800 p-4 sm:p-6 md:p-8 rounded-xl shadow-lg"
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.3 }}
               >
-                <h3 className="text-2xl font-bold mb-6">Follow Me</h3>
-                <div className="grid grid-cols-3 gap-4">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
+                  Follow Me
+                </h3>
+                <div className="grid grid-cols-3 gap-2 sm:gap-4">
                   <a
                     href="https://github.com/AlfredoLuisLagamon"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-col items-center p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-all hover:shadow-lg hover:shadow-blue-500/10"
+                    className="flex flex-col items-center p-2 sm:p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-all hover:shadow-lg hover:shadow-blue-500/10"
                   >
-                    <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-2">
+                    <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 sm:mb-2">
                       <svg
-                        className="w-6 h-6"
+                        className="w-4 h-4 sm:w-6 sm:h-6"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -129,43 +133,43 @@ const Footer = () => {
                         ></path>
                       </svg>
                     </div>
-                    <span>GitHub</span>
+                    <span className="text-xs sm:text-sm">GitHub</span>
                   </a>
 
                   <a
                     href="https://www.linkedin.com/in/alfredo-luis-lagamon-a70065236/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-col items-center p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-all hover:shadow-lg hover:shadow-blue-500/10"
+                    className="flex flex-col items-center p-2 sm:p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-all hover:shadow-lg hover:shadow-blue-500/10"
                   >
-                    <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-2">
+                    <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 sm:mb-2">
                       <svg
-                        className="w-6 h-6"
+                        className="w-4 h-4 sm:w-6 sm:h-6"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
                         <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"></path>
                       </svg>
                     </div>
-                    <span>LinkedIn</span>
+                    <span className="text-xs sm:text-sm">LinkedIn</span>
                   </a>
 
                   <a
                     href="https://www.facebook.com/alfredo.lagamon"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-col items-center p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-all hover:shadow-lg hover:shadow-blue-500/10"
+                    className="flex flex-col items-center p-2 sm:p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-all hover:shadow-lg hover:shadow-blue-500/10"
                   >
-                    <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-2">
+                    <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 sm:mb-2">
                       <svg
-                        className="w-6 h-6"
+                        className="w-4 h-4 sm:w-6 sm:h-6"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
                         <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
                       </svg>
                     </div>
-                    <span>Facebook</span>
+                    <span className="text-xs sm:text-sm">Facebook</span>
                   </a>
                 </div>
               </motion.div>
@@ -174,15 +178,17 @@ const Footer = () => {
         </div>
 
         <motion.div
-          className="py-6 border-t border-gray-800 text-center"
+          className="py-4 sm:py-6 border-t border-gray-800 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div></div>
-            <div className="mt-4 md:mt-0">
+            <div className="text-gray-400 text-sm mb-2 md:mb-0">
+              © {currentYear} Alfredo Luis Lagamon
+            </div>
+            <div>
               <p className="text-gray-400 text-sm">
                 Built with <span className="text-blue-400">React</span> and{" "}
                 <span className="text-blue-400">Next.js</span>

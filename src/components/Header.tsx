@@ -23,6 +23,29 @@ const Header = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  // Improved navigation handler that works on mobile
+  const handleNavigation = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Close mobile menu
+      setMobileMenuOpen(false);
+
+      // Small delay to ensure menu closing animation doesn't interfere
+      setTimeout(() => {
+        // Scroll to element with offset for header
+        const headerOffset = 80; // Adjust based on your header height
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }, 10);
+    }
+  };
+
   return (
     <motion.header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -40,9 +63,13 @@ const Header = () => {
           className="text-2xl font-bold"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.2 }}
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
         >
           <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            Alfredo
+            AlfredoLuis
           </span>
           <span className="text-gray-800">.dev</span>
         </motion.a>
@@ -57,13 +84,13 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.1 * index }}
               >
-                <a
-                  href={`#${item.toLowerCase()}`}
+                <button
+                  onClick={() => handleNavigation(item.toLowerCase())}
                   className="font-medium hover:text-blue-600 transition-colors relative group"
                 >
                   {item}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-                </a>
+                </button>
               </motion.li>
             ))}
           </ul>
@@ -112,13 +139,12 @@ const Header = () => {
         <ul className="py-4 px-6 space-y-4">
           {["About", "Projects", "Contact"].map((item) => (
             <li key={item}>
-              <a
-                href={`#${item.toLowerCase()}`}
-                className="block py-2 font-medium hover:text-blue-600 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+              <button
+                onClick={() => handleNavigation(item.toLowerCase())}
+                className="block w-full text-left py-2 font-medium hover:text-blue-600 transition-colors"
               >
                 {item}
-              </a>
+              </button>
             </li>
           ))}
         </ul>

@@ -154,7 +154,7 @@ const AnimatedHero = () => {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden md:block"
         animate={{ y: [0, 10, 0] }}
         transition={{
           repeat: Infinity,
