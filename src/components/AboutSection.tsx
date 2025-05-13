@@ -19,15 +19,6 @@ const AboutSection = () => {
     },
   };
 
-  const skills = [
-    { name: "HTML/CSS", level: 90 },
-    { name: "JavaScript", level: 85 },
-    { name: "React", level: 80 },
-    { name: "Node.js", level: 75 },
-    { name: "TypeScript", level: 70 },
-    { name: "UI/UX Design", level: 85 },
-  ];
-
   return (
     <section id="about" className="py-20 relative">
       {/* Background elements - using opacity to allow animations to show through */}
@@ -49,63 +40,136 @@ const AboutSection = () => {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           variants={fadeIn}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-16"
+          className="py-16 px-6 max-w-6xl mx-auto grid gap-12 md:grid-cols-2 items-start"
         >
+          {/* Who I Am */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6 text-gray-800">
-              Who I Am
-            </h3>
-            <div className="space-y-4 text-gray-600">
+            <h2 className="text-3xl font-bold mb-4">Who I Am</h2>
+            <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                I'm a passionate Web Developer with expertise in creating modern
-                and intuitive web applications. With a strong foundation in both
-                front-end and back-end technologies, I develop comprehensive
-                solutions that address real-world problems.
+                I’m Alfred, a front-end developer passionate about building
+                clean, responsive, and engaging user interfaces. I specialize in
+                working with modern frameworks like React and Vue, and I take
+                pride in crafting experiences that feel intuitive and polished.
+                From design implementation to smooth interactions, I focus on
+                the details that turn a functional website into something truly
+                enjoyable to use.
               </p>
               <p>
-                My approach combines technical expertise with creative
-                problem-solving to deliver projects that exceed expectations.
-                I'm constantly learning and adapting to new technologies to stay
-                at the forefront of web development.
+                My journey into front-end development started with curiosity and
+                a love for creating things that just work. Over time, I’ve grown
+                my skill set by exploring tools like TypeScript, Next.js,
+                Tailwind CSS, and Vite, while also diving into design systems,
+                animations, and performance optimization. I'm always
+                learning—whether it's building better UI components,
+                experimenting with Framer Motion, or refining my workflow with
+                tools like Storybook and Git.
               </p>
               <p>
-                When I'm not coding, you can find me exploring new technologies,
-                contributing to open-source projects, or sharing my knowledge
-                through blog posts and mentoring.
+                At the core of my work is a strong focus on user experience and
+                seamless collaboration. I enjoy working closely with designers,
+                product teams, and fellow developers to bring ideas to life
+                through code that’s clean, scalable, and thoughtfully built. I
+                believe that great front-end development is more than just
+                visual polish—it’s about clarity, efficiency, and building
+                interfaces that just feel right.
               </p>
-            </div>
-
-            <div className="mt-8">
-              <a href="#projects" className="btn btn-primary">
-                See My Work
-              </a>
             </div>
           </div>
 
+          {/* My Skills */}
           <div>
-            <h3 className="text-2xl font-semibold mb-6 text-gray-800">
-              My Skills
-            </h3>
-            <div className="space-y-6">
-              {skills.map((skill, index) => (
-                <div key={index}>
-                  <div className="flex justify-between mb-2">
-                    <span className="font-medium">{skill.name}</span>
-                    <span className="text-blue-600">{skill.level}%</span>
-                  </div>
-                  <div className="h-2 w-full bg-gray-200 rounded-full">
-                    <motion.div
-                      className="h-full bg-blue-600 rounded-full"
-                      style={{ width: `${skill.level}%` }}
-                      initial={{ width: 0 }}
-                      animate={
-                        inView ? { width: `${skill.level}%` } : { width: 0 }
-                      }
-                      transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
-                    />
-                  </div>
-                </div>
-              ))}
+            <h2 className="text-3xl font-bold mb-4">My Skills</h2>
+            <p className="text-gray-600 mb-6">
+              Here's my current toolbox—always growing, always evolving.
+            </p>
+
+            <div className="grid gap-6">
+              {/* Frontend */}
+              <div>
+                <h3 className="text-lg font-semibold mb-2">Frontend</h3>
+                <ul className="flex flex-wrap gap-3">
+                  {[
+                    "React",
+                    "Vue",
+                    "Next.js",
+                    "JavaScript",
+                    "TypeScript",
+                    "HTML",
+                    "CSS",
+                  ].map((skill) => (
+                    <li
+                      key={skill}
+                      className="bg-blue-100 text-sm px-3 py-1 rounded-full hover:bg-blue-200 transition-all duration-300 font-medium"
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Tools & Workflow */}
+              <div>
+                <h3 className="text-lg font-semibold mb-2">Tools & Workflow</h3>
+                <ul className="flex flex-wrap gap-3">
+                  {[
+                    "Node.js",
+                    "Tailwind",
+                    "Vite",
+                    "Git",
+                    "GitHub",
+                    "VS Code",
+                    "Figma",
+                  ].map((tool) => (
+                    <li
+                      key={tool}
+                      className="bg-green-100 text-sm px-3 py-1 rounded-full hover:bg-green-200 transition-all duration-300 font-medium"
+                    >
+                      {tool}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Soft Skills */}
+              <div>
+                <h3 className="text-lg font-semibold mb-2">Soft Skills</h3>
+                <ul className="flex flex-wrap gap-3">
+                  {[
+                    "Team Collaboration",
+                    "Effective Communication",
+                    "Problem Solving",
+                    "Time Management",
+                    "Adaptability",
+                    "Creative Thinking",
+                    "Attention to Detail",
+                  ].map((skill) => (
+                    <li
+                      key={skill}
+                      className="bg-purple-100 text-sm px-3 py-1 rounded-full hover:bg-purple-200 transition-all duration-300"
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Currently Exploring */}
+              <div>
+                <h3 className="text-lg font-semibold mb-2">
+                  Currently Exploring
+                </h3>
+                <ul className="flex flex-wrap gap-3">
+                  {["Framer Motion", "Storybook"].map((item) => (
+                    <li
+                      key={item}
+                      className="bg-yellow-100 text-sm px-3 py-1 rounded-full hover:bg-yellow-200 transition-all duration-300"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </motion.div>

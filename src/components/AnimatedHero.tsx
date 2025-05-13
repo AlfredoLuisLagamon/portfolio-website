@@ -85,9 +85,10 @@ const AnimatedHero = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              I create modern, responsive web applications with a focus on user
-              experience and clean design. Transforming ideas into seamless
-              digital experiences.
+              I design and build modern, responsive web applications with a
+              strong focus on user experience, performance, and clean, scalable
+              code. My goal is to turn ideas into seamless digital experiences
+              that not only look great—but feel intuitive and engaging.
             </motion.p>
             <motion.div
               className="flex flex-wrap gap-4"

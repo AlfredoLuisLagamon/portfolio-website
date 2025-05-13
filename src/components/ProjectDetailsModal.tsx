@@ -73,10 +73,7 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
             {/* Modal Body */}
             <div className="flex-1 overflow-auto p-4">
               {/* Image Gallery */}
-              <div
-                className="relative mb-6 bg-gray-100 rounded-lg overflow-hidden"
-                style={{ height: "400px" }}
-              >
+              <div className="relative mb-6 bg-gray-100 rounded-lg overflow-hidden h-[250px] sm:h-[300px] md:h-[400px]">
                 {!imageError[currentImageIndex] ? (
                   <img
                     src={project.images[currentImageIndex]}
