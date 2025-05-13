@@ -3,10 +3,13 @@ import { motion } from "framer-motion";
 
 const AnimatedHero = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-16 bg-gradient-to-br from-slate-50/80 to-blue-50/80 overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center pt-16 bg-gradient-to-br from-slate-50/80 to-blue-50/80 overflow-hidden"
+    >
       {/* Enhanced background animations */}
       <motion.div
-        className="absolute top-1/4 right-10 w-96 h-96 rounded-full bg-blue-200 opacity-30 blur-3xl"
+        className="absolute top-1/4 right-10 w-96 h-96 rounded-full bg-blue-200 opacity-20 blur-3xl"
         animate={{
           x: [0, -40, 0],
           y: [0, -50, 0],
@@ -19,7 +22,7 @@ const AnimatedHero = () => {
         }}
       />
       <motion.div
-        className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-indigo-200 opacity-40 blur-3xl"
+        className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-indigo-200 opacity-30 blur-3xl"
         animate={{
           x: [0, 50, 0],
           y: [0, -30, 0],
@@ -32,7 +35,7 @@ const AnimatedHero = () => {
         }}
       />
       <motion.div
-        className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-purple-200 opacity-30 blur-3xl"
+        className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-purple-200 opacity-20 blur-3xl"
         animate={{
           x: [0, 30, 0],
           y: [0, 40, 0],
@@ -46,6 +49,22 @@ const AnimatedHero = () => {
         }}
       />
 
+      {/* Additional animated backgrounds for visual interest */}
+      <motion.div
+        className="absolute top-1/3 right-1/3 w-72 h-72 rounded-full bg-cyan-100 opacity-25 blur-3xl"
+        animate={{
+          x: [0, 40, 0],
+          y: [0, 20, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 23,
+          ease: "easeInOut",
+          delay: 1.5,
+        }}
+      />
+
       {/* Hero content */}
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -55,55 +74,55 @@ const AnimatedHero = () => {
             transition={{ duration: 0.8 }}
             className="flex flex-col"
           >
-            <motion.h2
-              className="text-xl font-medium text-blue-600 mb-4"
+            <motion.div
+              className="inline-block mb-6 px-4 py-1 bg-blue-50 border border-blue-100 rounded-full"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Hello, I'm
-            </motion.h2>
+              <p className="text-sm font-medium text-blue-600">
+                Web Developer & Designer
+              </p>
+            </motion.div>
+
             <motion.h1
-              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Alfredo Luis Lagamon
+              Hello, I'm{" "}
+              <span className="gradient-text">Alfredo Luis Lagamon</span>
             </motion.h1>
-            <motion.h2
-              className="text-3xl font-light text-gray-700 mb-8"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              Web Developer & Designer
-            </motion.h2>
+
             <motion.p
-              className="text-lg text-gray-600 mb-10 max-w-lg"
+              className="text-lg text-gray-600 mb-8 max-w-lg"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
             >
               I design and build modern, responsive web applications with a
               strong focus on user experience, performance, and clean, scalable
               code. My goal is to turn ideas into seamless digital experiences
               that not only look great—but feel intuitive and engaging.
             </motion.p>
+
             <motion.div
               className="flex flex-wrap gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
             >
-              <a
+              <motion.a
                 href="#projects"
-                className="btn-primary px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all shadow-lg hover:shadow-blue-300/30 flex items-center gap-2"
+                className="btn btn-primary"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
                 <span>View My Work</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="h-5 w-5 ml-2"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -113,22 +132,51 @@ const AnimatedHero = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="#contact"
-                className="btn-outline px-6 py-3 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-medium rounded-lg transition-all flex items-center gap-2"
+                className="btn btn-outline"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
                 <span>Get In Touch</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="h-5 w-5 ml-2"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                 </svg>
-              </a>
+              </motion.a>
+            </motion.div>
+
+            {/* Technology badges */}
+            <motion.div
+              className="mt-8 flex flex-wrap gap-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1 }}
+            >
+              {[
+                "React",
+                "Next.js",
+                "TypeScript",
+                "Tailwind CSS",
+                "Node.js",
+              ].map((tech, index) => (
+                <motion.div
+                  key={tech}
+                  className="px-3 py-1 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-full shadow-sm text-sm font-medium text-gray-700"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
+                  whileHover={{ y: -3, scale: 1.05 }}
+                >
+                  {tech}
+                </motion.div>
+              ))}
             </motion.div>
           </motion.div>
 
@@ -139,14 +187,35 @@ const AnimatedHero = () => {
             className="hidden lg:flex justify-center"
           >
             <motion.div
-              className="w-[500px] h-[500px] rounded-full overflow-hidden border-8 border-white shadow-2xl"
-              whileHover={{ scale: 1.05 }}
+              className="w-[400px] h-[400px] lg:w-[450px] lg:h-[450px] rounded-full overflow-hidden border-8 border-white shadow-xl relative"
+              whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.3 }}
             >
+              {/* Image wrapper with gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-transparent"></div>
+
               <img
                 src="/images/Profile-Photo.jpg"
                 alt="Alfredo Luis Lagamon"
                 className="w-full h-full object-cover"
+              />
+
+              {/* Decorative elements */}
+              <motion.div
+                className="absolute -top-2 -right-2 w-12 h-12 bg-blue-500 rounded-full"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: [0.8, 1, 0.8],
+                }}
+                transition={{ repeat: Infinity, duration: 4 }}
+              />
+              <motion.div
+                className="absolute -bottom-2 -left-2 w-16 h-16 bg-indigo-600 rounded-full"
+                animate={{
+                  scale: [1, 1.15, 1],
+                  opacity: [0.8, 1, 0.8],
+                }}
+                transition={{ repeat: Infinity, duration: 5, delay: 1 }}
               />
             </motion.div>
           </motion.div>

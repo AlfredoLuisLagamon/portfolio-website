@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -48,27 +48,28 @@ const Header = () => {
 
   return (
     <motion.header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-white/90 backdrop-blur-md shadow-lg py-3"
+          ? "bg-white/90 backdrop-blur-md shadow-md py-3"
           : "bg-transparent py-5"
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         <motion.a
           href="#"
-          className="text-2xl font-bold"
-          whileHover={{ scale: 1.05 }}
+          className="text-2xl font-bold flex items-center"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
           transition={{ duration: 0.2 }}
           onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
             AlfredoLuis
           </span>
           <span className="text-gray-800">.dev</span>
@@ -77,20 +78,26 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:block">
           <ul className="flex gap-8">
-            {["About", "Projects", "Contact"].map((item, index) => (
+            {[
+              { name: "About", delay: 0.1 },
+              { name: "Projects", delay: 0.2 },
+              { name: "Contact", delay: 0.3 },
+            ].map((item) => (
               <motion.li
-                key={item}
+                key={item.name}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 * index }}
+                transition={{ duration: 0.5, delay: item.delay }}
               >
-                <button
-                  onClick={() => handleNavigation(item.toLowerCase())}
-                  className="font-medium hover:text-blue-600 transition-colors relative group"
+                <motion.button
+                  onClick={() => handleNavigation(item.name.toLowerCase())}
+                  className="font-medium hover:text-blue-600 transition-colors relative group py-1"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-                </button>
+                  {item.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 group-hover:w-full transition-all duration-300"></span>
+                </motion.button>
               </motion.li>
             ))}
           </ul>
@@ -98,57 +105,81 @@ const Header = () => {
 
         {/* Mobile menu button */}
         <div className="md:hidden">
-          <button
+          <motion.button
             onClick={toggleMobileMenu}
-            className="p-2 focus:outline-none"
+            className="p-2 rounded-md focus:outline-none"
+            whileTap={{ scale: 0.9 }}
             aria-label="Toggle menu"
           >
             <div className="w-6 h-5 flex flex-col justify-between">
-              <span
-                className={`w-full h-0.5 bg-gray-800 transition-all duration-300 ${
-                  mobileMenuOpen ? "transform rotate-45 translate-y-2" : ""
-                }`}
-              ></span>
-              <span
-                className={`w-full h-0.5 bg-gray-800 transition-opacity duration-300 ${
-                  mobileMenuOpen ? "opacity-0" : "opacity-100"
-                }`}
-              ></span>
-              <span
-                className={`w-full h-0.5 bg-gray-800 transition-all duration-300 ${
-                  mobileMenuOpen ? "transform -rotate-45 -translate-y-2" : ""
-                }`}
-              ></span>
+              <motion.span
+                animate={
+                  mobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }
+                }
+                transition={{ duration: 0.3 }}
+                className="w-full h-0.5 bg-gray-800 origin-left"
+              />
+              <motion.span
+                animate={{ opacity: mobileMenuOpen ? 0 : 1 }}
+                transition={{ duration: 0.3 }}
+                className="w-full h-0.5 bg-gray-800"
+              />
+              <motion.span
+                animate={
+                  mobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }
+                }
+                transition={{ duration: 0.3 }}
+                className="w-full h-0.5 bg-gray-800 origin-left"
+              />
             </div>
-          </button>
+          </motion.button>
         </div>
       </div>
 
       {/* Mobile menu */}
-      <motion.nav
-        className={`md:hidden bg-white shadow-lg ${
-          mobileMenuOpen ? "block" : "hidden"
-        }`}
-        initial={{ opacity: 0, height: 0 }}
-        animate={{
-          opacity: mobileMenuOpen ? 1 : 0,
-          height: mobileMenuOpen ? "auto" : 0,
-        }}
-        transition={{ duration: 0.3 }}
-      >
-        <ul className="py-4 px-6 space-y-4">
-          {["About", "Projects", "Contact"].map((item) => (
-            <li key={item}>
-              <button
-                onClick={() => handleNavigation(item.toLowerCase())}
-                className="block w-full text-left py-2 font-medium hover:text-blue-600 transition-colors"
-              >
-                {item}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </motion.nav>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.nav
+            className="md:hidden bg-white/95 backdrop-blur-sm shadow-lg absolute w-full"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.ul
+              className="py-4 px-6 space-y-2"
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={{
+                open: { transition: { staggerChildren: 0.07 } },
+                closed: {
+                  transition: { staggerChildren: 0.05, staggerDirection: -1 },
+                },
+              }}
+            >
+              {["About", "Projects", "Contact"].map((item) => (
+                <motion.li
+                  key={item}
+                  variants={{
+                    open: { opacity: 1, y: 0 },
+                    closed: { opacity: 0, y: -10 },
+                  }}
+                >
+                  <motion.button
+                    onClick={() => handleNavigation(item.toLowerCase())}
+                    className="block w-full text-left py-3 px-4 font-medium hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50"
+                    whileHover={{ x: 5 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    {item}
+                  </motion.button>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 };

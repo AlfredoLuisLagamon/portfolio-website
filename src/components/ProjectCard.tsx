@@ -26,53 +26,77 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     threshold: 0.1,
   });
 
+  // Animation variants
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.6 }}
-      className="project-card group cursor-pointer transform transition-all duration-300 hover:-translate-y-2"
+      variants={cardVariants}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      className="project-card group h-full flex flex-col bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl dark:shadow-gray-900/30 cursor-pointer"
       onClick={onClick}
     >
-      <div className="relative overflow-hidden rounded-t-xl">
-        <div className="relative h-64 overflow-hidden">
+      <div className="relative overflow-hidden">
+        <div className="h-60 sm:h-64 overflow-hidden">
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-            <div className="p-6 w-full">
-              <div className="flex justify-center">
-                <span className="text-white bg-blue-600 px-4 py-2 rounded-lg font-medium text-sm">
-                  View Details
-                </span>
-              </div>
-            </div>
+
+          {/* Overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-blue-900/70 via-blue-800/30 to-transparent opacity-0 group-hover:opacity-100 flex items-end justify-center pb-6 transition-all duration-300">
+            <motion.button
+              className="bg-white text-blue-600 px-4 py-2 rounded-lg font-medium transform -translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View Details
+            </motion.button>
           </div>
         </div>
       </div>
 
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+      <div className="p-6 flex-1 flex flex-col">
+        <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
           {title}
         </h3>
-        <p className="text-gray-600 mb-4 line-clamp-2">{description}</p>
 
-        <div className="flex flex-wrap gap-2">
+        <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 flex-grow">
+          {description}
+        </p>
+
+        <div className="flex flex-wrap gap-2 mt-auto">
           {technologies.slice(0, 3).map((tech, index) => (
-            <span
+            <motion.span
               key={index}
-              className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+              className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100/80 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200 border border-blue-200 dark:border-blue-800"
+              whileHover={{ y: -2, scale: 1.05 }}
+              transition={{ duration: 0.2 }}
             >
               {tech}
-            </span>
+            </motion.span>
           ))}
           {technologies.length > 3 && (
-            <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-              +{technologies.length - 3} more
-            </span>
+            <motion.span
+              className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-600"
+              whileHover={{ y: -2, scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              +{technologies.length - 3}
+            </motion.span>
           )}
         </div>
       </div>
