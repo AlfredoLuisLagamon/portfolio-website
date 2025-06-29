@@ -1,188 +1,154 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+import ThemeToggle from "./ThemeToggle";
 
-const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scrolled]);
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
-  // Improved navigation handler that works on mobile
-  const handleNavigation = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      // Close mobile menu
-      setMobileMenuOpen(false);
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
 
-      // Small delay to ensure menu closing animation doesn't interfere
-      setTimeout(() => {
-        // Scroll to element with offset for header
-        const headerOffset = 80; // Adjust based on your header height
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
+  const handleNavigation = (path: string) => {
+    router.push(path);
+    closeMenu();
+  };
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      }, 10);
+  const handleKeyDown = (event: React.KeyboardEvent, path: string) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleNavigation(path);
     }
   };
 
-  return (
-    <motion.header
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-white/90 backdrop-blur-md shadow-md py-3"
-          : "bg-transparent py-5"
-      }`}
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        <motion.a
-          href="#"
-          className="text-2xl font-bold flex items-center"
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ duration: 0.2 }}
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-        >
-          <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
-            AlfredoLuis
-          </span>
-          <span className="text-gray-800">.dev</span>
-        </motion.a>
-        {/* Desktop Navigation */}
-        <nav className="hidden md:block">
-          <ul className="flex gap-8">
-            {[
-              { name: "About", delay: 0.1 },
-              { name: "Projects", delay: 0.2 },
-              { name: "Contact", delay: 0.3 },
-            ].map((item) => (
-              <motion.li
-                key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: item.delay }}
-              >
-                <motion.button
-                  onClick={() => handleNavigation(item.name.toLowerCase())}
-                  className="font-medium hover:text-blue-600 transition-colors relative group py-1"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 group-hover:w-full transition-all duration-300"></span>
-                </motion.button>
-              </motion.li>
-            ))}
-          </ul>
-        </nav>{" "}
-        {/* Mobile menu button */}
-        <div className="md:hidden">
-          <motion.button
-            onClick={toggleMobileMenu}
-            className="p-2 rounded-md focus:outline-none"
-            whileTap={{ scale: 0.9 }}
-            aria-label="Toggle menu"
-          >
-            <div className="w-6 h-5 flex flex-col justify-between relative">
-              <motion.span
-                animate={
-                  mobileMenuOpen
-                    ? { rotate: 45, y: 9, width: "100%" }
-                    : { rotate: 0, y: 0 }
-                }
-                transition={{ duration: 0.3 }}
-                className="w-full h-0.5 bg-gray-800 absolute top-0 left-0 origin-center"
-              />
-              <motion.span
-                animate={{ opacity: mobileMenuOpen ? 0 : 1 }}
-                transition={{ duration: 0.2 }}
-                className="w-full h-0.5 bg-gray-800 absolute top-1/2 -translate-y-1/2"
-              />
-              <motion.span
-                animate={
-                  mobileMenuOpen
-                    ? { rotate: -45, y: -9, width: "100%" }
-                    : { rotate: 0, y: 0 }
-                }
-                transition={{ duration: 0.3 }}
-                className="w-full h-0.5 bg-gray-800 absolute bottom-0 left-0 origin-center"
-              />
-            </div>
-          </motion.button>
-        </div>
-      </div>
+  const isActivePage = (path: string) => {
+    if (path === '/' && router.pathname === '/') return true;
+    if (path !== '/' && router.pathname === path) return true;
+    return false;
+  };
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.nav
-            className="md:hidden bg-white/95 backdrop-blur-sm shadow-lg absolute w-full"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+  return (
+    <header 
+      className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/20 dark:border-white/10"
+      role="banner"
+    >
+      <nav 
+        className="container mx-auto px-4 sm:px-6 lg:px-8"
+        role="navigation"
+        aria-label="Main navigation"
+      >
+        <div className="flex items-center justify-between h-16">
+          {/* Logo/Brand */}
+          <div 
+            className="flex-shrink-0 cursor-pointer"
+            onClick={() => handleNavigation('/')}
+            onKeyDown={(e) => handleKeyDown(e, '/')}
+            tabIndex={0}
+            role="button"
+            aria-label="Go to homepage"
           >
-            <motion.ul
-              className="py-4 px-6 space-y-2"
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={{
-                open: { transition: { staggerChildren: 0.07 } },
-                closed: {
-                  transition: { staggerChildren: 0.05, staggerDirection: -1 },
-                },
-              }}
-            >
-              {["About", "Projects", "Contact"].map((item) => (
-                <motion.li
-                  key={item}
-                  variants={{
-                    open: { opacity: 1, y: 0 },
-                    closed: { opacity: 0, y: -10 },
-                  }}
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+              Alfredo Luis Lagamon
+            </h1>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-8">
+              {[
+                { path: '/', label: 'Home' },
+                { path: '/about', label: 'About' },
+                { path: '/projects', label: 'Projects' },
+                { path: '/contact', label: 'Contact' }
+              ].map(({ path, label }) => (
+                <button
+                  key={path}
+                  onClick={() => handleNavigation(path)}
+                  onKeyDown={(e) => handleKeyDown(e, path)}
+                  className={`px-3 py-2 text-sm font-medium transition-all duration-200 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none rounded-md ${
+                    isActivePage(path)
+                      ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
+                      : 'text-gray-700 dark:text-gray-300'
+                  }`}
+                  aria-current={isActivePage(path) ? 'page' : undefined}
+                  tabIndex={0}
                 >
-                  <motion.button
-                    onClick={() => handleNavigation(item.toLowerCase())}
-                    className="block w-full text-left py-3 px-4 font-medium hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50"
-                    whileHover={{ x: 5 }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    {item}
-                  </motion.button>
-                </motion.li>
+                  {label}
+                </button>
               ))}
-            </motion.ul>
-          </motion.nav>
+            </div>
+          </div>
+
+          {/* Right side: Theme toggle and mobile menu */}
+          <div className="flex items-center space-x-4">
+            <ThemeToggle />
+            
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={toggleMenu}
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200"
+                aria-controls="mobile-menu"
+                aria-expanded={isMenuOpen}
+                aria-label={isMenuOpen ? "Close main menu" : "Open main menu"}
+              >
+                <span className="sr-only">{isMenuOpen ? "Close main menu" : "Open main menu"}</span>
+                {!isMenuOpen ? (
+                  <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                ) : (
+                  <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMenuOpen && (
+          <div 
+            className="md:hidden"
+            id="mobile-menu"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="mobile-menu-button"
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200/20 dark:border-white/10">
+              {[
+                { path: '/', label: 'Home' },
+                { path: '/about', label: 'About' },
+                { path: '/projects', label: 'Projects' },
+                { path: '/contact', label: 'Contact' }
+              ].map(({ path, label }) => (
+                <button
+                  key={path}
+                  onClick={() => handleNavigation(path)}
+                  onKeyDown={(e) => handleKeyDown(e, path)}
+                  className={`block w-full text-left px-3 py-2 text-base font-medium transition-all duration-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 focus:outline-none rounded-md ${
+                    isActivePage(path)
+                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                      : 'text-gray-700 dark:text-gray-300'
+                  }`}
+                  role="menuitem"
+                  aria-current={isActivePage(path) ? 'page' : undefined}
+                  tabIndex={0}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
-      </AnimatePresence>
-    </motion.header>
+      </nav>
+    </header>
   );
 };
 

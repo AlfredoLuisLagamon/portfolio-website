@@ -23,7 +23,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   return (
     <div
-      className="project-card group h-full flex flex-col bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl dark:shadow-gray-900/30 cursor-pointer"
+      className="project-card group h-full flex flex-col bg-white dark:bg-gray-800 rounded-xl overflow-hidden cursor-pointer"
       onClick={onClick}
     >
       {" "}
@@ -51,7 +51,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
       </div>
       <div className="p-6 flex-1 flex flex-col">
-        <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+        <h3 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
           {title}
         </h3>
 
@@ -63,7 +63,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {technologies.slice(0, 3).map((tech, index) => (
             <motion.span
               key={index}
-              className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100/80 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200 border border-blue-200 dark:border-blue-800"
+              className="px-3 py-1 rounded-full font-medium bg-blue-100/80 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200 border border-blue-200 dark:border-blue-800"
               whileHover={{ y: -2, scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
@@ -72,7 +72,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           ))}
           {technologies.length > 3 && (
             <motion.span
-              className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-600"
+              className="px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-600"
               whileHover={{ y: -2, scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >

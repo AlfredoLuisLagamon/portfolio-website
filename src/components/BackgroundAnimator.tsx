@@ -1,36 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 
 interface BackgroundAnimatorProps {
   variant?: "light" | "dark";
   intensity?: "subtle" | "medium" | "high";
   className?: string;
-  reducedMotion?: boolean;
 }
 
 /**
  * A component that adds subtle animated background elements to any section
  * Use this to create visual interest without being distracting
- * Now with performance optimizations and reduced motion support
  */
 const BackgroundAnimator: React.FC<BackgroundAnimatorProps> = ({
   variant = "light",
   intensity = "medium",
   className = "",
-  reducedMotion = false,
 }) => {
-  const [isClient, setIsClient] = useState(false);
-  const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-    rootMargin: "200px",
-  });
-
-  // Only animate when component is in viewport and client-side
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
   // Determine opacity based on intensity
   const getOpacity = () => {
     switch (intensity) {

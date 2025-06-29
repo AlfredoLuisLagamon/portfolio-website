@@ -3,17 +3,71 @@
 @tailwind utilities;
 
 :root {
+  /* Light theme colors */
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 245, 245, 245;
   --primary-color: #2563EB;
   --secondary-color: #0F172A;
   --accent-color: #4F46E5;
+  
+  /* Transitions */
   --transition-normal: all 0.3s ease-in-out;
   --transition-slow: all 0.5s ease-in-out;
+  
+  /* Light theme shadows */
   --box-shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.08);
   --box-shadow-md: 0 10px 15px rgba(0, 0, 0, 0.03), 0 4px 6px rgba(0, 0, 0, 0.05);
   --box-shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.03), 0 10px 10px rgba(0, 0, 0, 0.04);
+  
+  /* Glass morphism - Light theme */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-strong: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --glass-shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.2);
+  
+  /* Surface colors */
+  --surface-primary: rgb(255, 255, 255);
+  --surface-secondary: rgb(248, 250, 252);
+  --surface-tertiary: rgb(241, 245, 249);
+  
+  /* Text colors */
+  --text-primary: rgb(15, 23, 42);
+  --text-secondary: rgb(51, 65, 85);
+  --text-tertiary: rgb(100, 116, 139);
+}
+
+.dark {
+  /* Dark theme colors */
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 15, 23, 42;
+  --background-end-rgb: 2, 6, 23;
+  --primary-color: #3B82F6;
+  --secondary-color: #F1F5F9;
+  --accent-color: #6366F1;
+  
+  /* Dark theme shadows */
+  --box-shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --box-shadow-md: 0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.4);
+  --box-shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.4), 0 10px 10px rgba(0, 0, 0, 0.5);
+  
+  /* Glass morphism - Dark theme */
+  --glass-bg: rgba(0, 0, 0, 0.1);
+  --glass-bg-strong: rgba(0, 0, 0, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --glass-shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.4);
+  
+  /* Surface colors */
+  --surface-primary: rgb(15, 23, 42);
+  --surface-secondary: rgb(30, 41, 59);
+  --surface-tertiary: rgb(51, 65, 85);
+  
+  /* Text colors */
+  --text-primary: rgb(248, 250, 252);
+  --text-secondary: rgb(203, 213, 225);
+  --text-tertiary: rgb(148, 163, 184);
 }
 
 * {
@@ -25,6 +79,40 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  /* Prevent theme flashing */
+  color-scheme: light dark;
+}
+
+/* Reduced Motion Support - Accessibility First */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+  
+  /* Still allow opacity transitions for better UX */
+  .opacity-transition {
+    transition-duration: 0.15s !important;
+    transition-property: opacity !important;
+  }
+}
+
+/* Theme transition for smooth switching - Optimized */
+html.theme-transitioning,
+html.theme-transitioning * {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, 
+              backdrop-filter 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+/* Prevent layout shift during theme transitions */
+html.theme-transitioning * {
+  animation: none !important;
+  transform: none !important;
 }
 
 body {
@@ -39,6 +127,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
@@ -47,6 +136,7 @@ a {
   transition: var(--transition-normal);
 }
 
+/* Scroll reveal animations */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -58,9 +148,28 @@ a {
   transform: translateY(0);
 }
 
+/* Theme-aware scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
 @layer components {
   .section-heading {
     @apply text-4xl md:text-5xl font-bold mb-10 text-center relative inline-block;
+    color: var(--text-primary);
   }
   
   .section-heading::after {
@@ -82,15 +191,18 @@ a {
   }
   
   .btn-primary {
-    @apply bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg hover:shadow-blue-300/20 hover:-translate-y-0.5;
+    @apply bg-blue-600 text-white hover:bg-blue-700 hover:-translate-y-0.5;
   }
   
   .btn-outline {
-    @apply border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:-translate-y-0.5 shadow-sm hover:shadow-md;
+    @apply border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:-translate-y-0.5;
   }
 
+  /* Updated project card with theme awareness */
   .project-card {
-    @apply w-full bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+    @apply w-full rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1;
+    background: var(--surface-primary);
+    border: 1px solid rgba(var(--foreground-rgb), 0.15);
     backface-visibility: hidden;
   }
 
@@ -107,6 +219,75 @@ a {
   }
   
   .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+    @apply transition-all duration-300 hover:-translate-y-1;
+  }
+
+  /* Performance optimizations for animations */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .will-change-auto {
+    will-change: auto;
+  }
+  
+  /* Mobile optimizations */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+
+  /* Optimize glass morphism with GPU acceleration */
+  .glass-surface {
+    background: var(--glass-bg);
+    transform: translateZ(0); /* Enable hardware acceleration */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-surface-strong {
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* Theme-aware text colors */
+  .text-primary {
+    color: var(--text-primary);
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .text-tertiary {
+    color: var(--text-tertiary);
+  }
+
+  /* Theme-aware surface colors */
+  .surface-primary {
+    background-color: var(--surface-primary);
+  }
+
+  .surface-secondary {
+    background-color: var(--surface-secondary);
+  }
+
+  .surface-tertiary {
+    background-color: var(--surface-tertiary);
   }
 }

@@ -1,75 +1,84 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import AnimatedHero from "../components/AnimatedHero";
-import AboutSection from "../components/AboutSection";
+import { ProfileCard } from "../components/cards";
+import TechStackMarquee from "../components/TechStackMarquee";
+import ExperienceSection from "../components/ExperienceSection";
 import ProjectsSection from "../components/ProjectsSection";
-import OptimizedBackgroundAnimator from "../components/OptimizedBackgroundAnimator";
-import { motion } from "framer-motion";
 
 const Home = () => {
   return (
     <>
       <Head>
-        <title>Alfredo Luis Lagamon | Web Developer & Designer</title>
+        <title>Alfredo Luis Lagamon | Full Stack Developer & Web Designer</title>
         <meta
           name="description"
-          content="Portfolio website of Alfredo Luis Lagamon, a web developer and designer specializing in creating modern, responsive web applications."
+          content="Welcome to the portfolio of Alfredo Luis Lagamon - a passionate full-stack developer specializing in React, Next.js, Vue.js, and Node.js. Creating modern web experiences with clean code and innovative solutions."
+        />
+        <meta 
+          name="keywords" 
+          content="Alfredo Luis Lagamon, Full Stack Developer, Web Developer, React Developer, Next.js, Vue.js, Node.js, JavaScript, TypeScript, Portfolio, Web Design" 
         />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="canonical" href="https://alfredolagamon.com" />
+        
         {/* Open Graph / Social Media Meta Tags */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://alfredolagamon.com" />
+        <meta property="og:site_name" content="Alfredo Luis Lagamon Portfolio" />
         <meta
           property="og:title"
-          content="Alfredo Luis Lagamon | Web Developer & Designer"
+          content="Alfredo Luis Lagamon | Full Stack Developer & Web Designer"
         />
         <meta
           property="og:description"
-          content="Portfolio website showcasing modern web development projects and skills."
+          content="Portfolio website showcasing modern web development projects, skills in React, Next.js, Vue.js, and innovative full-stack solutions."
         />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://alfredolagamon.com" />
         <meta
           property="og:image"
-          content="https://alfredolagamon.com/images/social-preview.jpg"
-        />{" "}
-        {/* Fonts now loaded optimally through next/font */}
+          content="https://alfredolagamon.com/images/Profile-Photo.jpg"
+        />
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="400" />
+        <meta property="og:image:alt" content="Alfredo Luis Lagamon - Full Stack Developer" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content="@alfredolagamon" />
+        <meta name="twitter:site" content="@alfredolagamon" />
+        <meta
+          name="twitter:title"
+          content="Alfredo Luis Lagamon | Full Stack Developer & Web Designer"
+        />
+        <meta
+          name="twitter:description"
+          content="Portfolio showcasing modern web development projects and full-stack solutions using React, Next.js, Vue.js, and Node.js"
+        />
+        <meta
+          name="twitter:image"
+          content="https://alfredolagamon.com/images/Profile-Photo.jpg"
+        />
+        <meta name="twitter:image:alt" content="Alfredo Luis Lagamon - Full Stack Developer" />
+        
+        {/* Additional SEO Meta Tags */}
+        <meta name="geo.region" content="PH" />
+        <meta name="geo.country" content="Philippines" />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="7 days" />
       </Head>
 
-      <div className="flex flex-col min-h-screen overflow-x-hidden">
-        <Header />
+      <>
+        {/* Profile section with social media style layout */}
+        <ProfileCard />
 
-        <main className="flex-grow">
-          {/* Hero section with its own background animations */}
-          <AnimatedHero />
+        {/* Tech Stack Marquee - What I work with */}
+        <TechStackMarquee />
 
-          {/* About section with subtle background animations */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {/* Render BackgroundAnimator without wrapping it in fade in animation */}{" "}
-            <OptimizedBackgroundAnimator variant="light" intensity="medium" />
-            <AboutSection />
-          </motion.div>
+        {/* Experience section */}
+        <ExperienceSection />
 
-          {/* Projects section with medium intensity background animations */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            {/* Render OptimizedBackgroundAnimator with dark variant for contrast */}
-            <OptimizedBackgroundAnimator variant="dark" intensity="medium" />
-            <ProjectsSection />
-          </motion.div>
-        </main>
-
-        <Footer />
-      </div>
+        {/* Projects section */}
+        <ProjectsSection />
+      </>
     </>
   );
 };

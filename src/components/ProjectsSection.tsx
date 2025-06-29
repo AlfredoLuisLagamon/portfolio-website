@@ -1,18 +1,10 @@
 import React, { useState } from "react";
-import ProjectCard from "./ProjectCard";
 import ProjectDetailsModal from "./ProjectDetailsModal";
-import { motion } from "framer-motion";
 import { Project } from "../types/project";
 import { projects } from "../data/projects";
-import { useInView } from "react-intersection-observer";
 
 const ProjectsSection: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-    rootMargin: "-50px",
-  });
 
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
@@ -21,128 +13,83 @@ const ProjectsSection: React.FC = () => {
   const handleCloseModal = () => {
     setSelectedProject(null);
   };
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-        duration: 0.5,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const projectVariant = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
 
   return (
-    <section
-      id="projects"
-      className="py-24 relative bg-gradient-to-b from-white to-blue-50/30"
-    >
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-white to-transparent" />
-      <div className="absolute -top-10 right-10 w-72 h-72 rounded-full bg-blue-100/50 blur-3xl" />
-      <div className="absolute bottom-10 left-10 w-80 h-80 rounded-full bg-indigo-100/50 blur-3xl" />
-
-      <div className="section-container relative z-10">
-        <div className="flex justify-center mb-16">
-          <motion.h2
-            className="section-heading"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            My Projects
-          </motion.h2>
+    <>
+      {/* Section Header */}
+      <section className="pt-4 md:pt-6 pb-4 md:pb-6">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-primary">Featured Projects</h2>
+          </div>
         </div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-16"
-        >
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Check out some of my recent work. These projects showcase my skills
-            in front-end web development, UI/UX design, and problem-solving.
-          </p>
-        </motion.div>{" "}
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              variants={projectVariant}
-              whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <ProjectCard
-                title={project.title}
-                description={project.description}
-                technologies={project.technologies}
-                imageSrc={project.images[0]}
-                imageAlt={`${project.title} screenshot`}
-                projectUrl={project.projectUrl}
-                githubUrl={project.githubUrl}
+      </section>
+
+      {/* Individual Project Cards */}
+                {projects.map((project) => (
+        <section key={project.title} className="py-3 md:py-4">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-3xl mx-auto">
+              <div 
+                className="relative h-72 md:h-96 rounded-xl overflow-hidden cursor-pointer group"
                 onClick={() => handleProjectClick(project)}
-              />
-            </motion.div>
-          ))}
-        </motion.div>
-        {/* View all projects button */}
-        {/* <motion.div 
-          className="mt-16 flex justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          <motion.a 
-            href="/projects"
-            className="btn btn-outline px-8 py-3"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            View All Projects
-            <svg 
-              className="ml-2 w-5 h-5" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M14 5l7 7m0 0l-7 7m7-7H3" 
-              />
-            </svg>
-          </motion.a>
-        </motion.div> */}
-      </div>
+              >
+                {/* Full Background Image */}
+                <img
+                  src={project.images[0]}
+                  alt={`${project.title} screenshot`}
+                  className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                />
+                
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-black/90 group-hover:via-black/50 transition-colors duration-300" />
+                
+                {/* Content Overlay */}
+                <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-6">
+                  {/* Technologies at top */}
+                  <div className="flex flex-wrap gap-2 justify-end">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-blue-100/80 text-blue-800 dark:bg-blue-900/80 dark:text-blue-200 border border-blue-200/60 dark:border-blue-700/60 font-medium rounded-full backdrop-blur-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <span className="px-3 py-1 bg-blue-100/80 text-blue-800 dark:bg-blue-900/80 dark:text-blue-200 border border-blue-200/60 dark:border-blue-700/60 font-medium rounded-full backdrop-blur-sm">
+                        +{project.technologies.length - 3}
+                      </span>
+                    )}
+                  </div>
+                  
+                  {/* Project Info at bottom */}
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{project.title}</h3>
+                    <p className="text-white/90 text-sm md:text-base mb-4 line-clamp-2">
+                      {project.description}
+                    </p>
+                    
+                    {/* Click indicator */}
+                    <div className="flex items-center gap-2 text-white/80 group-hover:text-white transition-colors">
+                      <span className="text-sm font-medium">Learn more</span>
+                      <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
 
       <ProjectDetailsModal
         project={selectedProject}
         onClose={handleCloseModal}
       />
-    </section>
+    </>
   );
 };
 
