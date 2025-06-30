@@ -17,16 +17,35 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>('system');
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
-
-  useEffect(() => {
-    // Get theme from localStorage on initial load
+  // Initialize with the theme that's already applied to prevent flash
+  const getInitialTheme = (): Theme => {
+    if (typeof window === 'undefined') return 'system';
     const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
-      setTheme(savedTheme);
+    return savedTheme && ['light', 'dark', 'system'].includes(savedTheme) ? savedTheme : 'system';
+  };
+
+  const getInitialResolvedTheme = (): 'light' | 'dark' => {
+    if (typeof window === 'undefined') return 'light';
+    // Check what theme is already applied by the script in _document.tsx
+    const root = document.documentElement;
+    if (root.classList.contains('dark')) return 'dark';
+    return 'light';
+  };
+
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(getInitialResolvedTheme);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Ensure state is synchronized after hydration
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as Theme | null;
+    const currentTheme = savedTheme && ['light', 'dark', 'system'].includes(savedTheme) ? savedTheme : 'system';
+    
+    if (currentTheme !== theme) {
+      setTheme(currentTheme);
     }
-  }, []);
+    setIsInitialized(true);
+  }, [theme]);
 
   useEffect(() => {
     // Update resolvedTheme based on current theme
@@ -51,6 +70,9 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   }, [theme]);
 
   useEffect(() => {
+    // Only apply theme changes after initial hydration to prevent flash
+    if (!isInitialized) return;
+    
     // Apply theme to document with optimized transitions
     const root = document.documentElement;
     
@@ -74,7 +96,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     return () => {
       clearTimeout(transitionTimeout);
     };
-  }, [resolvedTheme]);
+  }, [resolvedTheme, isInitialized]);
 
   const handleSetTheme = (newTheme: Theme) => {
     setTheme(newTheme);

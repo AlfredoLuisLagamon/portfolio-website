@@ -92,10 +92,10 @@ function MyApp({ Component, pageProps, router }: AppProps) {
           )}
 
           {/* Persistent Layout */}
-          <div className="flex flex-col min-h-screen overflow-x-hidden">
+          <div className="flex flex-col min-h-screen overflow-x-hidden bg-gradient-to-br from-slate-50/30 to-blue-50/30 dark:from-slate-900/30 dark:to-blue-900/30">
             <Header />
 
-            <main className="flex-grow bg-gradient-to-br from-slate-50/30 to-blue-50/30 dark:from-slate-900/30 dark:to-blue-900/30">
+            <main className="flex-grow">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={router.route}
@@ -139,7 +139,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
                     </div>
                   }>
                     {/* Page Content with padding for header */}
-                    <div className="pt-16">
+                    <div className="pt-20 md:pt-28 pb-12 md:pb-16">
                       <Component {...pageProps} />
                     </div>
                   </ErrorBoundary>

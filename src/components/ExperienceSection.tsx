@@ -47,16 +47,16 @@ const ExperienceSection: React.FC = () => {
 
         {/* Timeline */}
         <div className="relative max-w-3xl mx-auto">
-          {workExperience.map((experience) => (
+          {/* Connecting Timeline Line */}
+          <div className="absolute left-6 top-6 bottom-0 w-0.5 bg-gray-300 dark:bg-gray-600"></div>
+          
+          {workExperience.map((experience, index) => (
             <div
               key={experience.id}
               className="relative pb-12 last:pb-0"
             >
-              {/* Timeline Line */}
-              <div className="absolute left-6 top-8 bottom-0 w-0.5 bg-gray-300 dark:bg-gray-600 last:hidden"></div>
-              
-              {/* Timeline Dot */}
-              <div className="absolute left-4 top-6 w-4 h-4 bg-white dark:bg-gray-900 border-4 border-blue-500 rounded-full"></div>
+              {/* Timeline Dot - Centered on the line */}
+              <div className="absolute left-[17px] top-6 w-4 h-4 bg-white dark:bg-gray-900 border-4 border-blue-500 rounded-full z-10"></div>
               
               {/* Content */}
               <div className="ml-16">

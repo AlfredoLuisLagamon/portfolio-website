@@ -16,7 +16,9 @@ const AboutPage = () => {
           name="keywords" 
           content="About Alfredo Luis Lagamon, Developer Story, Full Stack Experience, React Vue Node.js Expert, Xavier University Computer Science, Web Developer Journey" 
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/Logo_light.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" href="/images/Logo_dark.png" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/images/Logo_light.png" />
         <link rel="canonical" href="https://alfredolagamon.com/about" />
         
         {/* Open Graph Meta Tags */}
@@ -54,13 +56,13 @@ const AboutPage = () => {
         />
       </Head>
 
-      <div className="pt-8 pb-6 md:pb-8">
+      <>
         {/* About Me section */}
         <AboutSection />
 
         {/* Experience section */}
         <ExperienceSection />
-      </div>
+      </>
     </>
   );
 };

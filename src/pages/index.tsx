@@ -18,7 +18,9 @@ const Home = () => {
           name="keywords" 
           content="Alfredo Luis Lagamon, Full Stack Developer, Web Developer, React Developer, Next.js, Vue.js, Node.js, JavaScript, TypeScript, Portfolio, Web Design" 
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/Logo_light.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" href="/images/Logo_dark.png" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/images/Logo_light.png" />
         <link rel="canonical" href="https://alfredolagamon.com" />
         
         {/* Open Graph / Social Media Meta Tags */}

@@ -6,7 +6,9 @@ export default function Document() {
       <Head>
         {" "}
         <meta charSet="utf-8" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/Logo_light.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" href="/images/Logo_dark.png" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/images/Logo_light.png" />
         {/* Viewport optimization */}
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         {/* Theme color with media queries for light/dark mode */}
@@ -62,6 +64,32 @@ export default function Document() {
                 "description": "Lead Developer"
               }
             }),
+          }}
+        />
+        {/* Prevent theme flash by setting theme before hydration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme') || 'system';
+                  var resolvedTheme;
+                  
+                  if (theme === 'system') {
+                    resolvedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  } else {
+                    resolvedTheme = theme;
+                  }
+                  
+                  document.documentElement.classList.add(resolvedTheme);
+                  document.documentElement.style.colorScheme = resolvedTheme;
+                } catch (e) {
+                  // Fallback to light theme if there's an error
+                  document.documentElement.classList.add('light');
+                  document.documentElement.style.colorScheme = 'light';
+                }
+              })();
+            `,
           }}
         />
       </Head>

@@ -15,7 +15,9 @@ const ProjectsPage = () => {
           name="keywords" 
           content="Alfredo Luis Lagamon Projects, Full Stack Projects, React Projects, Vue.js Projects, GIAMS, EduSync, evitePro, HRIS, Web Development Portfolio, Node.js Projects" 
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/Logo_light.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" href="/images/Logo_dark.png" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/images/Logo_light.png" />
         <link rel="canonical" href="https://alfredolagamon.com/projects" />
         
         {/* Open Graph Meta Tags */}
@@ -54,10 +56,10 @@ const ProjectsPage = () => {
         <meta name="twitter:image:alt" content="Full Stack Development Projects" />
       </Head>
 
-      <div className="pt-8 pb-6 md:pb-8">
+      <>
         {/* Projects section */}
         <ProjectsSection />
-      </div>
+      </>
     </>
   );
 };

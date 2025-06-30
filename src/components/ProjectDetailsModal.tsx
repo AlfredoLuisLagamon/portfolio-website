@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Project } from "../types/project";
@@ -16,7 +17,14 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageError, setImageError] = useState<Record<number, boolean>>({});
   const [isImageChanging, setIsImageChanging] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+
+  // Ensure component is mounted before using portal
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
 
   // Reset image index when project changes
   useEffect(() => {
@@ -57,7 +65,7 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
     };
   }, [project, onClose, prefersReducedMotion]);
 
-  if (!project) return null;
+  if (!project || !isMounted) return null;
 
   const handleNextImage = () => {
     if (isImageChanging) return;
@@ -126,11 +134,11 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
     },
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {project && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center sm:p-4 bg-black/50 dark:bg-black/70 backdrop-blur-sm will-change-opacity"
+          className="fixed inset-0 z-50 md:top-20 md:bottom-0 flex items-center justify-center sm:p-4 bg-black/50 dark:bg-black/70 backdrop-blur-sm will-change-opacity"
           variants={overlayVariants}
           initial="hidden"
           animate="visible"
@@ -140,7 +148,7 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
         >
           <motion.div
             variants={modalVariants}
-            className="bg-white dark:bg-gray-900 sm:bg-white/95 sm:dark:bg-gray-900/95 sm:backdrop-blur-lg rounded-none sm:rounded-2xl max-w-6xl w-full h-full sm:h-auto sm:max-h-[95vh] overflow-hidden flex flex-col border-0 sm:border sm:border-gray-200/50 sm:dark:border-white/20 will-change-transform opacity-transition"
+            className="bg-white dark:bg-gray-900 sm:bg-white/95 sm:dark:bg-gray-900/95 sm:backdrop-blur-lg rounded-none sm:rounded-2xl max-w-6xl w-full h-full sm:h-auto sm:max-h-[90vh] md:max-h-[85vh] overflow-hidden flex flex-col border-0 sm:border sm:border-gray-200/50 sm:dark:border-white/20 will-change-transform opacity-transition"
             onClick={(e) => e.stopPropagation()}
             data-modal
             style={{ 
@@ -321,7 +329,8 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 

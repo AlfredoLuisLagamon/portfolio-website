@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 
-const ThemeToggle: React.FC = () => {
+interface ThemeToggleProps {
+  isScrolled?: boolean;
+}
+
+const ThemeToggle: React.FC<ThemeToggleProps> = ({ isScrolled = false }) => {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -36,7 +40,11 @@ const ThemeToggle: React.FC = () => {
       {/* Desktop Version - Text Button */}
       <button
         onClick={handleToggle}
-        className="hidden md:inline-flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none rounded-md text-gray-700 dark:text-gray-300"
+        className={`hidden md:inline-flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none rounded-md ${
+          isScrolled 
+            ? 'text-gray-700 dark:text-gray-300'
+            : 'text-gray-900 dark:text-white drop-shadow-sm'
+        }`}
         aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} mode`}
       >
         {resolvedTheme === 'light' ? 'Dark' : 'Light'}
@@ -45,7 +53,11 @@ const ThemeToggle: React.FC = () => {
       {/* Mobile Version - Icon Button */}
       <motion.button
         onClick={handleToggle}
-        className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200"
+        className={`md:hidden inline-flex items-center justify-center p-2 rounded-md hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-all duration-200 ${
+          isScrolled
+            ? 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+            : 'text-gray-900 dark:text-white drop-shadow-sm hover:bg-white/20 dark:hover:bg-black/20'
+        }`}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} mode`}

@@ -15,7 +15,9 @@ const ContactPage = () => {
           name="keywords" 
           content="Contact Alfredo Luis Lagamon, Hire Full Stack Developer, React Developer Contact, Vue.js Developer, Node.js Developer, Freelance Web Developer, Full Stack Collaboration" 
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/Logo_light.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" href="/images/Logo_dark.png" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/images/Logo_light.png" />
         <link rel="canonical" href="https://alfredolagamon.com/contact" />
         
         {/* Open Graph Meta Tags */}
@@ -54,10 +56,10 @@ const ContactPage = () => {
         <meta name="twitter:image:alt" content="Contact Full Stack Developer" />
       </Head>
 
-      <div className="pt-8 pb-6 md:pb-8">
+      <>
         {/* Contact section */}
         <ContactSection />
-      </div>
+      </>
     </>
   );
 };
