@@ -46,8 +46,8 @@ export default function Document() {
               "url": "https://alfredolagamon.com",
               "image": "https://alfredolagamon.com/images/Profile-Photo.jpg",
               "sameAs": [
-                "https://github.com/alfredolagamon",
-                "https://linkedin.com/in/alfredolagamon"
+                "https://github.com/AlfredoLuisLagamon",
+                "https://www.linkedin.com/in/alfredo-luis-lagamon-a70065236/"
               ],
               "knowsAbout": [
                 "JavaScript", "TypeScript", "React", "Next.js", "Vue.js", 
@@ -55,13 +55,13 @@ export default function Document() {
               ],
               "alumniOf": {
                 "@type": "CollegeOrUniversity",
-                "name": "Xavier University",
+                "name": "Xavier University - Ateneo de Cagayan",
                 "description": "Bachelor of Science in Computer Science"
               },
               "worksFor": {
                 "@type": "Organization",
                 "name": "Restore Masters LLC",
-                "description": "Lead Developer"
+                "description": "Full-Stack Web Developer"
               }
             }),
           }}

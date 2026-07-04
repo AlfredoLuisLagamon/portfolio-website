@@ -1,6 +1,7 @@
 import React from 'react';
 import { profileData } from '../../data/profile';
 import { ContentCard } from './';
+import { scrollToSection } from '../../utils/scrollToSection';
 
 const ProfileCard: React.FC = () => {
   const getSocialIcon = (iconName: string) => {
@@ -26,10 +27,10 @@ const ProfileCard: React.FC = () => {
 
 
   return (
-    <section className="pb-6 md:pb-8">
+    <section id="home" className="pb-6 md:pb-8">
       <div className="container mx-auto px-4 md:px-6">
         <ContentCard
-          className="max-w-3xl mx-auto"
+          className="max-w-page mx-auto"
           variant="strong"
           padding="md"
           hover={false}
@@ -59,10 +60,37 @@ const ProfileCard: React.FC = () => {
             </div>
           }
         >
-          {/* Bio */}
-          <p className="text-secondary leading-relaxed">
-            {profileData.bio}
+          <p className="text-lg font-semibold text-primary mb-3">
+            {profileData.title}
           </p>
+          <div className="space-y-4 mb-4">
+            {profileData.bioParagraphs.map((paragraph) => (
+              <p key={paragraph} className="text-secondary leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+          <p className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-4">
+            {profileData.status}
+          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+            <a
+              href={`mailto:${profileData.email}`}
+              className="text-primary hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+            >
+              {profileData.email}
+            </a>
+            <span className="text-secondary hidden sm:inline" aria-hidden="true">
+              ·
+            </span>
+            <button
+              type="button"
+              onClick={() => scrollToSection('contact')}
+              className="text-primary hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+            >
+              Contact
+            </button>
+          </div>
         </ContentCard>
       </div>
     </section>

@@ -20,6 +20,13 @@ const nextConfig = {
     optimizeCss: true,
     scrollRestoration: true,
   },
+  async redirects() {
+    return [
+      { source: '/about', destination: '/', permanent: true },
+      { source: '/projects', destination: '/', permanent: true },
+      { source: '/contact', destination: '/', permanent: true },
+    ];
+  },
 };
 
 module.exports = nextConfig;

@@ -6,6 +6,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      maxWidth: {
+        page: '56rem',
+      },
       fontFamily: {
         sans: ['var(--font-inter)'],
       },

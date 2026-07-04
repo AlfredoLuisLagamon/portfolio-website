@@ -11,63 +11,48 @@ export interface ExperienceItem {
 
 export const experienceData: ExperienceItem[] = [
   {
-    id: 'restore-masters-2025',
-    title: 'Full-Stack Web Developer',
-    company: 'Restore Masters LLC',
+    id: 'genius-substrates-2026',
+    title: 'Senior Software Engineer',
+    company: 'Genius Substrates Inc.',
     location: 'Remote',
-    period: '2025 - Present',
+    period: '2026 - Present',
     type: 'work',
     description: [
-      'Developing custom web applications to digitalize and streamline business processes',
-      'Building responsive interfaces and robust backend systems to modernize legacy workflows',
-      'Implementing automated solutions to improve operational efficiency and data management',
-      'Collaborating with stakeholders to translate business requirements into technical solutions'
+      'Build and maintain production web applications, internal tools, and platform features for business operations and client-facing workflows',
+      'Work across front-end and full-stack features using modern JavaScript frameworks, API integrations, data-driven UI patterns, and deployment-ready code',
+      'Translate business requirements into usable dashboards, workflow tools, and system interfaces with clear UX and maintainable component structure',
+      'Use AI-assisted development to speed up planning, scaffolding, debugging, and iteration while owning final implementation quality and system behavior',
     ],
-    technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind CSS']
+    technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind CSS'],
   },
   {
-    id: 'ustp-programmer-1',
-    title: 'Computer Programmer II',
+    id: 'restore-masters-2025',
+    title: 'Senior Software Engineer',
+    company: 'RestoreMasters Contracting LLC',
+    location: 'Remote',
+    period: '2025 - 2026',
+    type: 'work',
+    description: [
+      'Developed React and Next.js applications that digitized business processes, internal workflows, and operational reporting',
+      'Built responsive dashboards, task-driven interfaces, real-time messaging features, and API-backed tools for production-style business systems',
+      'Implemented authentication flows, searchable message history, WebSocket-based communication, and dynamic data handling',
+      'Owned debugging, UI refinement, integration fixes, and release-ready code across front-end and back-end feature work',
+    ],
+    technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'WebSockets'],
+  },
+  {
+    id: 'ustp-programmer',
+    title: 'Computer Programmer',
     company: 'University of Science and Technology of Southern Philippines',
     location: 'Cagayan de Oro, Philippines',
-    period: '2022 - 2025',
+    period: '2021 - 2025',
     type: 'work',
     description: [
-      'Developed and maintained web applications using modern JavaScript frameworks',
-      'Contributed to UI/UX design and enhanced user engagement across multiple platforms',
-      'Implemented performance optimizations and responsive design patterns',
-      'Collaborated with cross-functional teams to deliver high-quality software solutions'
+      'Built and maintained institutional web systems for university operations, including GIAMS, EduSync, evitePro, HRIS, dashboards, and admin tools',
+      'Developed Vue.js and React interfaces with REST API integration, responsive layouts, role-based workflows, and reusable UI components',
+      'Improved usability, performance, and mobile responsiveness across internal applications used by staff, students, and end users',
+      'Collaborated with teams to translate operational requirements into tested, maintainable, and production-ready web features',
     ],
-    technologies: ['Vue.js', 'React', 'JavaScript', 'CSS3', 'HTML5', 'MySQL']
+    technologies: ['Vue.js', 'React', 'TypeScript', 'Node.js', 'MongoDB', 'PostgreSQL'],
   },
-  {
-    id: 'ustp-programmer-2',
-    title: 'Computer Programmer II (Project-Based)',
-    company: 'University of Science and Technology of Southern Philippines',
-    location: 'Cagayan de Oro, Philippines',
-    period: '2020 - 2022',
-    type: 'work',
-    description: [
-      'Developed feature-rich web applications supporting active users and real-time interactions',
-      'Built and optimized reusable UI components to improve development speed',
-      'Reduced application load time through performance optimization and efficient data fetching',
-      'Assisted in migrating legacy CSS to modern frameworks for better maintainability'
-    ],
-    technologies: ['JavaScript', 'jQuery', 'PHP', 'MySQL', 'Bootstrap']
-  },
-  {
-    id: 'xavier-education',
-    title: 'BS in Computer Science',
-    company: 'Xavier University - Ateneo de Cagayan',
-    location: 'Cagayan de Oro, Philippines',
-    period: 'Graduated 2020',
-    type: 'education',
-    description: [
-      'Completed comprehensive computer science curriculum with focus on software development',
-      'Gained expertise in programming fundamentals, data structures, and algorithms',
-      'Developed strong problem-solving skills and software engineering principles',
-      'Participated in various programming projects and collaborative development initiatives'
-    ],
-    technologies: ['Java', 'C++', 'Python', 'Database Design', 'Software Engineering']
-  }
-]; 
+];
