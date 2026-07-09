@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
 
 export type Theme = 'light' | 'dark' | 'system';
 
@@ -12,8 +12,47 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+const THEME_TRANSITION_MS = 400;
+
 interface ThemeProviderProps {
   children: ReactNode;
+}
+
+function prefersReducedMotion(): boolean {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function applyThemeClass(resolvedTheme: 'light' | 'dark') {
+  const root = document.documentElement;
+  root.classList.remove('light', 'dark');
+  root.classList.add(resolvedTheme);
+  root.style.colorScheme = resolvedTheme;
+}
+
+function runThemeTransition(resolvedTheme: 'light' | 'dark') {
+  const root = document.documentElement;
+  const update = () => applyThemeClass(resolvedTheme);
+
+  if (prefersReducedMotion()) {
+    update();
+    return;
+  }
+
+  // Cross-fade via View Transitions when available (Chrome, Edge, Safari 18+)
+  if (typeof document.startViewTransition === 'function') {
+    document.startViewTransition(update);
+    return;
+  }
+
+  // Fallback: CSS color/background interpolation
+  root.classList.add('theme-transitioning');
+  // Force a frame so the transition class is active before the theme swap
+  requestAnimationFrame(() => {
+    update();
+    window.setTimeout(() => {
+      root.classList.remove('theme-transitioning');
+    }, THEME_TRANSITION_MS);
+  });
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
@@ -35,17 +74,19 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(getInitialResolvedTheme);
   const [isInitialized, setIsInitialized] = useState(false);
+  const skipNextTransition = useRef(true);
 
   // Ensure state is synchronized after hydration
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     const currentTheme = savedTheme && ['light', 'dark', 'system'].includes(savedTheme) ? savedTheme : 'system';
-    
+
     if (currentTheme !== theme) {
       setTheme(currentTheme);
     }
     setIsInitialized(true);
-  }, [theme]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once after mount
+  }, []);
 
   useEffect(() => {
     // Update resolvedTheme based on current theme
@@ -70,32 +111,16 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   }, [theme]);
 
   useEffect(() => {
-    // Only apply theme changes after initial hydration to prevent flash
     if (!isInitialized) return;
-    
-    // Apply theme to document with optimized transitions
-    const root = document.documentElement;
-    
-    // Add transition class for smooth switching
-    root.classList.add('theme-transitioning');
-    
-    // Remove any existing theme classes
-    root.classList.remove('light', 'dark');
-    
-    // Add the resolved theme class
-    root.classList.add(resolvedTheme);
-    
-    // Update the color-scheme CSS property for native elements
-    root.style.colorScheme = resolvedTheme;
-    
-    // Remove transition class after animation completes (optimized timing)
-    const transitionTimeout = setTimeout(() => {
-      root.classList.remove('theme-transitioning');
-    }, 200); // Matches CSS transition duration
-    
-    return () => {
-      clearTimeout(transitionTimeout);
-    };
+
+    // First sync after hydration — theme is already on <html> from _document
+    if (skipNextTransition.current) {
+      skipNextTransition.current = false;
+      applyThemeClass(resolvedTheme);
+      return;
+    }
+
+    runThemeTransition(resolvedTheme);
   }, [resolvedTheme, isInitialized]);
 
   const handleSetTheme = (newTheme: Theme) => {
@@ -122,4 +147,4 @@ export function useTheme() {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
-} 
+}

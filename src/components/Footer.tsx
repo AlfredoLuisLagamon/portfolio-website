@@ -10,15 +10,15 @@ const Footer = () => {
         <div className="w-full h-px bg-gray-300 dark:bg-gray-600 mb-8 md:mb-10"></div>
         
         <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-          <div className="text-gray-600 dark:text-gray-400 text-sm mb-3 md:mb-0">
+          <div className="text-secondary text-sm mb-3 md:mb-0">
             © {currentYear} Alfredo Luis Lagamon. All code and content are my
             own.
           </div>
           <div>
-            <p className="text-gray-600 dark:text-gray-400 text-sm flex items-center justify-center gap-1">
+            <p className="text-secondary text-sm flex items-center justify-center gap-1">
               Built with
-              <span className="text-blue-500 dark:text-blue-400">React</span> and
-              <span className="text-blue-500 dark:text-blue-400">Next.js</span>
+              <span className="text-blue-600 dark:text-blue-400">React</span> and
+              <span className="text-blue-600 dark:text-blue-400">Next.js</span>
             </p>
           </div>
         </div>

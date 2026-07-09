@@ -13,8 +13,8 @@ const TechStackMarquee: React.FC = () => {
   const TechBadge: React.FC<{ tech: { name: string; icon: React.ComponentType<{ className?: string }> } }> = React.memo(({ tech }) => {
     const IconComponent = tech.icon;
     return (
-      <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full dark:bg-transparent dark:border-transparent text-gray-800 dark:text-gray-200 font-medium whitespace-nowrap mx-1.5 transition-none opacity-transition">
-        <IconComponent className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+      <div className="flex items-center gap-2 px-3 py-1.5 text-primary font-medium whitespace-nowrap mx-1.5 transition-none opacity-transition">
+        <IconComponent className="w-5 h-5 text-secondary" />
         <span>{tech.name}</span>
       </div>
     );
@@ -63,10 +63,10 @@ const TechStackMarquee: React.FC = () => {
   };
 
   return (
-    <section className="py-4 md:py-6 overflow-hidden relative">
+    <section className="py-6 md:py-8 overflow-hidden relative">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-page mx-auto mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-primary">Core stack</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-primary">Technical Skills</h2>
         </div>
 
         <div className="relative max-w-page mx-auto">

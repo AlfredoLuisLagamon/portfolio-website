@@ -49,14 +49,12 @@ const Header: React.FC = () => {
   };
 
   const navLinkClass = (isScrolled: boolean) =>
-    `px-3 py-2 text-sm font-medium transition-all duration-200 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none rounded-md ${
-      isScrolled
-        ? "text-gray-700 dark:text-gray-300"
-        : "text-gray-900 dark:text-white drop-shadow-sm"
+    `px-3 py-2 text-sm font-medium transition-all duration-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md ${
+      isScrolled ? "text-secondary" : "text-primary drop-shadow-sm"
     }`;
 
   const mobileNavLinkClass =
-    "block w-full text-left px-4 py-3 text-base font-medium transition-all duration-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 focus:outline-none rounded-lg text-gray-700 dark:text-gray-300";
+    "block w-full text-left px-4 py-3 text-base font-medium transition-all duration-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg text-secondary";
 
   return (
     <header
@@ -68,7 +66,7 @@ const Header: React.FC = () => {
       role="banner"
     >
       <nav
-        className="container mx-auto px-4 sm:px-6 lg:px-8"
+        className="container mx-auto px-4 md:px-6"
         role="navigation"
         aria-label="Main navigation"
       >
@@ -118,10 +116,10 @@ const Header: React.FC = () => {
 
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`inline-flex items-center justify-center p-2.5 rounded-lg transition-all duration-200 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none ${
+                className={`inline-flex items-center justify-center p-2.5 rounded-lg transition-all duration-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                   isScrolled
-                    ? "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                    : "text-gray-900 dark:text-white drop-shadow-sm hover:bg-white/20 dark:hover:bg-black/20"
+                    ? "text-secondary hover:bg-gray-100 dark:hover:bg-gray-800"
+                    : "text-primary drop-shadow-sm hover:bg-white/20 dark:hover:bg-black/20"
                 }`}
                 aria-controls="mobile-menu"
                 aria-expanded={isMenuOpen}
@@ -183,10 +181,8 @@ const Header: React.FC = () => {
               aria-label="Scroll to top"
             >
               <p
-                className={`font-bold transition-all duration-300 ease-in-out ${
-                  isScrolled
-                    ? "text-gray-900 dark:text-white"
-                    : "text-gray-900 dark:text-white drop-shadow-sm"
+                className={`font-bold text-primary transition-all duration-300 ease-in-out ${
+                  !isScrolled ? "drop-shadow-sm" : ""
                 }`}
               >
                 <span className="text-xl">Alfredo Luis Lagamon</span>

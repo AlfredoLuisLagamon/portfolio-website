@@ -52,7 +52,7 @@ const ProfileCard: React.FC = () => {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 glass-surface rounded-xl hover:scale-110 transition-transform duration-200 text-secondary hover:text-primary"
+                  className="p-3 glass-surface rounded-xl transition-all duration-300 hover:-translate-y-1 text-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {getSocialIcon(link.icon)}
                 </a>

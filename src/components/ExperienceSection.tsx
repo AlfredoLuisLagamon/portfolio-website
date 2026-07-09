@@ -5,7 +5,7 @@ const ExperienceSection: React.FC = () => {
   const workExperience = experienceData.filter((item) => item.type === 'work');
 
   return (
-    <section id="experience" className="py-4 md:py-6">
+    <section id="experience" className="py-6 md:py-8">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-page mx-auto mb-6">
           <h2 className="text-2xl md:text-3xl font-bold text-primary">Experience</h2>
@@ -20,7 +20,7 @@ const ExperienceSection: React.FC = () => {
 
               <div className="ml-16">
                 <p className="text-secondary font-medium mb-1">{experience.company}</p>
-                <h3 className="text-xl font-bold text-primary mb-2">{experience.title}</h3>
+                <h3 className="text-xl md:text-2xl font-bold text-primary mb-2">{experience.title}</h3>
                 <p className="text-secondary text-sm mb-4">{experience.period}</p>
 
                 <div className="space-y-2">

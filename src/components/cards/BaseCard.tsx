@@ -6,9 +6,11 @@ import { GlassCard } from '../glass';
  * 
  * DESIGN STANDARDS:
  * - Default padding: 'md' (p-6) for consistency across all cards
- * - Header font: text-xl md:text-2xl font-bold (use ContentCard when possible)
- * - Body text: text-base with text-secondary color (default browser size)
- * - Badges/tags: text-base font-medium (no text-sm)
+ * - Section / hero title: text-2xl md:text-3xl font-bold (ContentCard title)
+ * - Card / job title: text-xl md:text-2xl font-bold
+ * - Body text: text-base with text-secondary color
+ * - UI / CTAs: text-sm font-medium, px-4 py-2, rounded-lg
+ * - Panel radius: rounded-2xl · control radius: rounded-lg
  * - Spacing: mb-6 for header, mb-2 for title-subtitle gap
  */
 export interface BaseCardProps {

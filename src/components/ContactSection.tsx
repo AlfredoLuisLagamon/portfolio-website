@@ -40,12 +40,12 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-4 md:py-6" aria-labelledby="contact-heading">
+    <section id="contact" className="py-6 md:py-8" aria-labelledby="contact-heading">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-page mx-auto">
           <h2
             id="contact-heading"
-            className="text-2xl md:text-3xl font-bold text-primary mb-6 md:mb-8"
+            className="text-2xl md:text-3xl font-bold text-primary mb-6"
           >
             Connect With Me
           </h2>
@@ -170,7 +170,7 @@ const ContactSection = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-col items-center p-4 glass-surface rounded-xl hover:glass-surface-strong transition-all hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-transparent"
+                    className="flex flex-col items-center p-4 glass-surface rounded-xl hover:glass-surface-strong transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     aria-label={social.ariaLabel}
                     role="listitem"
                   >

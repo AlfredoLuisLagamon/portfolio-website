@@ -22,17 +22,8 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ isScrolled = false }) => {
   }
 
   const handleToggle = () => {
-    // Add transition class to html for smooth theme switching
-    document.documentElement.classList.add('theme-transitioning');
-    
-    // Toggle between light and dark (skip system for direct toggle)
     const newTheme = resolvedTheme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
-    
-    // Remove transition class after animation
-    setTimeout(() => {
-      document.documentElement.classList.remove('theme-transitioning');
-    }, 300);
   };
 
   return (
@@ -40,10 +31,8 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ isScrolled = false }) => {
       {/* Desktop Version - Text Button */}
       <button
         onClick={handleToggle}
-        className={`hidden md:inline-flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none rounded-md ${
-          isScrolled 
-            ? 'text-gray-700 dark:text-gray-300'
-            : 'text-gray-900 dark:text-white drop-shadow-sm'
+        className={`hidden md:inline-flex items-center px-3 py-2 text-sm font-medium transition-all duration-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md ${
+          isScrolled ? 'text-secondary' : 'text-primary drop-shadow-sm'
         }`}
         aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} mode`}
       >
@@ -53,10 +42,10 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ isScrolled = false }) => {
       {/* Mobile Version - Icon Button */}
       <motion.button
         onClick={handleToggle}
-        className={`md:hidden inline-flex items-center justify-center p-2 rounded-md hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-all duration-200 ${
+        className={`md:hidden inline-flex items-center justify-center p-2 rounded-md hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 ${
           isScrolled
-            ? 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-            : 'text-gray-900 dark:text-white drop-shadow-sm hover:bg-white/20 dark:hover:bg-black/20'
+            ? 'text-secondary hover:bg-gray-100 dark:hover:bg-gray-800'
+            : 'text-primary drop-shadow-sm hover:bg-white/20 dark:hover:bg-black/20'
         }`}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
