@@ -5,7 +5,7 @@ import { scrollToSection } from "../utils/scrollToSection";
 
 const NAV_ITEMS = [
   { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
+  { id: "projects", label: "Work Samples" },
   { id: "contact", label: "Contact" },
 ] as const;
 

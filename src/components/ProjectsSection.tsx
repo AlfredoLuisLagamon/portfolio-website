@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import ProjectDetailsModal from "./ProjectDetailsModal";
+import DemoRenderer from "./demos/DemoRenderer";
 import { Project } from "../types/project";
 import { projects } from "../data/projects";
 import { GITHUB_PROFILE_URL, githubRepos } from "../data/githubRepos";
+import { isDemoSlug } from "../data/demos";
 
 const ProjectsSection: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
-  const handleProjectClick = (project: Project) => {
-    setSelectedProject(project);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProject(null);
-  };
 
   return (
     <>
@@ -21,63 +15,49 @@ const ProjectsSection: React.FC = () => {
       <section id="projects" className="pt-4 md:pt-6 pb-4 md:pb-6">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-page mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary">Projects</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-primary">
+              Interactive Work Samples
+            </h2>
+            <p className="text-secondary mt-2 max-w-2xl">
+              Interactive demos from selected full-stack projects I&apos;ve worked on, covering
+              messaging, developer workflows, and visual page building.
+            </p>
           </div>
         </div>
       </section>
 
       {projects.map((project) => (
-        <section key={project.title} className="py-3 md:py-4">
+        <section key={project.slug} id={`project-${project.slug}`} className="py-4 md:py-6">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-page mx-auto">
-              <div 
-                className="relative h-72 md:h-96 rounded-xl overflow-hidden cursor-pointer group"
-                onClick={() => handleProjectClick(project)}
-              >
-                {/* Full Background Image */}
-                <img
-                  src={project.images[0]}
-                  alt={`${project.title} screenshot`}
-                  className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                />
-                
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-black/90 group-hover:via-black/50 transition-colors duration-300" />
-                
-                {/* Content Overlay */}
-                <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-6">
-                  {/* Proof highlights at top */}
-                  <div className="flex flex-wrap gap-2 justify-end">
-                    {project.highlights.map((highlight) => (
-                      <span
-                        key={highlight}
-                        className="px-3 py-1 bg-blue-100/80 text-blue-800 dark:bg-blue-900/80 dark:text-blue-200 border border-blue-200/60 dark:border-blue-700/60 font-medium rounded-full backdrop-blur-sm"
-                      >
-                        {highlight}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  {/* Project Info at bottom */}
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{project.title}</h3>
-                    <p className="text-white/90 text-sm md:text-base mb-1 line-clamp-1">
-                      {project.tagline}
-                    </p>
-                    <p className="text-white/75 text-sm md:text-base mb-4 line-clamp-1">
-                      {project.impact[0]}
-                    </p>
-                    
-                    {/* Click indicator */}
-                    <div className="flex items-center gap-2 text-white/80 group-hover:text-white transition-colors">
-                      <span className="text-sm font-medium">View case study</span>
-                      <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </div>
+            <div className="max-w-page mx-auto space-y-4">
+              {/* Project header */}
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-xl md:text-2xl font-bold text-primary">{project.title}</h3>
+                  <p className="text-secondary mt-1">{project.tagline}</p>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedProject(project)}
+                  className="inline-flex shrink-0 items-center gap-2 self-start rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:border-blue-700/60 dark:bg-blue-900/30 dark:text-blue-200 dark:hover:bg-blue-900/50"
+                >
+                  Show details
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
               </div>
+
+              {/* Inline demo */}
+              {isDemoSlug(project.slug) && (
+                <div className="rounded-xl border border-gray-200/60 dark:border-white/10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm overflow-hidden shadow-sm">
+                  <DemoRenderer slug={project.slug} />
+                </div>
+              )}
+
+              <p className="text-xs text-secondary">
+                Sample data only. Runs entirely in the browser with no backend.
+              </p>
             </div>
           </div>
         </section>
@@ -85,7 +65,7 @@ const ProjectsSection: React.FC = () => {
 
       <ProjectDetailsModal
         project={selectedProject}
-        onClose={handleCloseModal}
+        onClose={() => setSelectedProject(null)}
       />
 
       {/* More on GitHub */}

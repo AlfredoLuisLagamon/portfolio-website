@@ -17,4 +17,6 @@ export interface Project {
   githubUrl?: string;
   accessNote?: string;
   featured?: boolean;
+  demoType?: 'interactive' | 'screenshot-only';
+  ecosystem?: 'genius-os' | 'geniuzs-os' | 'enginezs' | 'genius-os-marketing';
 }

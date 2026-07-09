@@ -138,19 +138,23 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
     <AnimatePresence>
       {project && (
         <motion.div
-          className="fixed inset-0 z-50 md:top-20 md:bottom-0 flex items-center justify-center sm:p-4 bg-black/50 dark:bg-black/70 backdrop-blur-sm will-change-opacity"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/40 dark:bg-black/75 backdrop-blur-md supports-[backdrop-filter]:backdrop-blur-lg will-change-opacity"
           variants={overlayVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
           onClick={onClose}
           style={{ willChange: 'opacity' }}
+          aria-hidden="true"
         >
           <motion.div
             variants={modalVariants}
-            className="bg-white dark:bg-gray-900 sm:bg-white/95 sm:dark:bg-gray-900/95 sm:backdrop-blur-lg rounded-none sm:rounded-2xl max-w-6xl w-full h-full sm:h-auto sm:max-h-[90vh] md:max-h-[85vh] overflow-hidden flex flex-col border-0 sm:border sm:border-gray-200/50 sm:dark:border-white/20 will-change-transform opacity-transition"
+            className="bg-white dark:bg-gray-900 sm:bg-white/98 sm:dark:bg-gray-900/98 sm:backdrop-blur-xl rounded-xl sm:rounded-2xl max-w-6xl w-full max-h-[92vh] sm:max-h-[88vh] overflow-hidden flex flex-col border border-gray-200/60 dark:border-white/15 shadow-2xl shadow-black/20 dark:shadow-black/50 will-change-transform opacity-transition"
             onClick={(e) => e.stopPropagation()}
             data-modal
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-modal-title"
             style={{ 
               willChange: 'transform, opacity',
               backfaceVisibility: 'hidden',
@@ -180,7 +184,7 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
               </button>
 
               <div className="pr-12 sm:pr-12">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-2 leading-tight">
+                <h2 id="project-modal-title" className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-2 leading-tight">
                   {project.title}
                 </h2>
                 <p className="text-secondary text-sm sm:text-base md:text-base leading-relaxed pr-4 sm:pr-0 mb-3">
@@ -195,7 +199,7 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
             {/* Content - Full screen mobile optimized */}
             <div className="flex-1 overflow-auto">
               {/* Case study */}
-              <div className="px-4 sm:px-6 pt-4 sm:pt-0 pb-4 sm:pb-6 space-y-5 border-b border-gray-200/50 dark:border-white/10">
+              <div className="px-4 sm:px-6 pt-4 sm:pt-0 pb-5 sm:pb-6 space-y-5 border-b border-gray-200/60 dark:border-white/10">
                 <div>
                   <h3 className="text-sm font-semibold uppercase tracking-wide text-primary mb-2">
                     Context
@@ -253,6 +257,8 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
               </div>
 
               {/* Image Gallery - Full screen mobile */}
+              {project.images.length > 0 && (
+              <>
               <div className="px-0 sm:px-6 mb-4 sm:mb-6">
                 <div className="relative bg-gray-100 dark:bg-black/30 rounded-none sm:rounded-xl overflow-hidden h-[300px] sm:h-[280px] md:h-[400px] lg:h-[480px] border-0 sm:border sm:border-gray-200 sm:dark:border-white/10">
                   <AnimatePresence mode="wait">
@@ -366,16 +372,22 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({
                   </div>
                 </div>
               )}
+              </>
+              )}
 
-              {/* Technologies - Full screen mobile */}
-              <div className="px-4 sm:px-6 pb-4 sm:pb-6">
-                <h3 className="text-base sm:text-lg font-semibold text-primary mb-3 sm:mb-4 flex items-center">
+              {/* Technologies */}
+              <div
+                className={`px-4 sm:px-6 pb-6 sm:pb-8 ${
+                  project.images.length === 0 ? 'pt-6 sm:pt-8' : 'pt-4 sm:pt-6'
+                }`}
+              >
+                <h3 className="text-base sm:text-lg font-semibold text-primary mb-4 sm:mb-5 flex items-center">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-500 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
                   Technologies Used
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 sm:gap-2.5">
                   {project.technologies.map((tech, index) => (
                     <span
                       key={index}

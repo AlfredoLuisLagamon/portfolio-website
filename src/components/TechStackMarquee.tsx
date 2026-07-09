@@ -1,42 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useReducedMotion } from '../utils/useReducedMotion';
-import { DiReact, DiNodejs, DiMongodb, DiGit } from 'react-icons/di';
-import {
-  SiTypescript,
-  SiNextdotjs,
-  SiVuedotjs,
-  SiTailwindcss,
-  SiRedux,
-  SiExpress,
-  SiPostgresql,
-  SiFirebase,
-  SiVite,
-} from 'react-icons/si';
-import { TbApi } from 'react-icons/tb';
+import { coreStack } from '../data/coreStack';
 
 const TechStackMarquee: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
 
-  const technologies = [
-    { name: 'TypeScript', icon: SiTypescript },
-    { name: 'React', icon: DiReact },
-    { name: 'Next.js', icon: SiNextdotjs },
-    { name: 'Vue.js', icon: SiVuedotjs },
-    { name: 'Tailwind CSS', icon: SiTailwindcss },
-    { name: 'Node.js', icon: DiNodejs },
-    { name: 'Express', icon: SiExpress },
-    { name: 'PostgreSQL', icon: SiPostgresql },
-    { name: 'MongoDB', icon: DiMongodb },
-    { name: 'REST API', icon: TbApi },
-    { name: 'Firebase', icon: SiFirebase },
-    { name: 'Git', icon: DiGit },
-    { name: 'Vite', icon: SiVite },
-    { name: 'Redux', icon: SiRedux },
-  ];
-
-  const row1 = technologies.slice(0, 7);
-  const row2 = technologies.slice(7, 14);
+  const midpoint = Math.ceil(coreStack.length / 2);
+  const row1 = coreStack.slice(0, midpoint);
+  const row2 = coreStack.slice(midpoint);
 
   const TechBadge: React.FC<{ tech: { name: string; icon: React.ComponentType<{ className?: string }> } }> = React.memo(({ tech }) => {
     const IconComponent = tech.icon;

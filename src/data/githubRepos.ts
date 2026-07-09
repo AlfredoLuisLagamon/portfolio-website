@@ -10,7 +10,7 @@ export const githubRepos: GitHubRepo[] = [
   {
     name: 'portfolio-website',
     url: `${GITHUB_PROFILE_URL}/portfolio-website`,
-    description: 'Personal portfolio — Next.js, TypeScript, Tailwind, accessible project case-study modals',
+    description: 'Personal portfolio built with Next.js, TypeScript, Tailwind, and accessible project case-study modals',
   },
   {
     name: 'bea-portfolio-website',
@@ -25,6 +25,6 @@ export const githubRepos: GitHubRepo[] = [
   {
     name: 'assesment-repo',
     url: `${GITHUB_PROFILE_URL}/assesment-repo`,
-    description: 'Front-end technical assessment exercises — components, state, and UI patterns',
+    description: 'Front-end technical assessment exercises covering components, state, and UI patterns',
   },
 ];
