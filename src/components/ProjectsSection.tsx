@@ -16,7 +16,7 @@ const ProjectsSection: React.FC = () => {
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-page mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-primary">
-              Interactive Work Samples
+              Projects
             </h2>
             <p className="text-secondary mt-2 max-w-2xl">
               Interactive demos from selected full-stack projects I&apos;ve worked on, covering

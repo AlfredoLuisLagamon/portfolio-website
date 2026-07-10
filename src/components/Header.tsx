@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { useTheme } from "../contexts/ThemeContext";
 import ThemeToggle from "./ThemeToggle";
 import { scrollToSection } from "../utils/scrollToSection";
 
 const NAV_ITEMS = [
   { id: "experience", label: "Experience" },
-  { id: "projects", label: "Work Samples" },
+  { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ] as const;
 
@@ -14,6 +15,7 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -39,13 +41,24 @@ const Header: React.FC = () => {
 
   const handleLogoClick = () => {
     closeMenu();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (router.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    router.push("/");
   };
 
-  const handleSectionNav = (sectionId: string) => {
+  const handleSectionNav = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) => {
     closeMenu();
-    scrollToSection(sectionId);
-    window.history.replaceState(null, "", `#${sectionId}`);
+
+    if (router.pathname === "/") {
+      event.preventDefault();
+      scrollToSection(sectionId);
+      window.history.replaceState(null, "", `#${sectionId}`);
+    }
   };
 
   const navLinkClass = (isScrolled: boolean) =>
@@ -192,14 +205,14 @@ const Header: React.FC = () => {
             <div className="flex justify-center">
               <div className="flex items-baseline space-x-6">
                 {NAV_ITEMS.map(({ id, label }) => (
-                  <button
+                  <a
                     key={id}
-                    type="button"
-                    onClick={() => handleSectionNav(id)}
+                    href={`/#${id}`}
+                    onClick={(event) => handleSectionNav(event, id)}
                     className={navLinkClass(isScrolled)}
                   >
                     {label}
-                  </button>
+                  </a>
                 ))}
               </div>
             </div>
@@ -219,15 +232,15 @@ const Header: React.FC = () => {
           >
             <div className="px-3 pt-3 pb-4 space-y-2 border-t border-gray-200/20 dark:border-white/10">
               {NAV_ITEMS.map(({ id, label }) => (
-                <button
+                <a
                   key={id}
-                  type="button"
-                  onClick={() => handleSectionNav(id)}
+                  href={`/#${id}`}
+                  onClick={(event) => handleSectionNav(event, id)}
                   className={mobileNavLinkClass}
                   role="menuitem"
                 >
                   {label}
-                </button>
+                </a>
               ))}
             </div>
           </div>

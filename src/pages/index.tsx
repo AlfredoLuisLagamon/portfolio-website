@@ -6,14 +6,20 @@ import TechStackMarquee from "../components/TechStackMarquee";
 import ExperienceSection from "../components/ExperienceSection";
 import ProjectsSection from "../components/ProjectsSection";
 import ContactSection from "../components/ContactSection";
-import { SITE_URL, SITE_NAME, ROLE_TITLE } from "../data/site";
+import {
+  OG_IMAGE_PATH,
+  ROLE_TITLE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+} from "../data/site";
+import { absoluteUrl } from "../lib/seo";
 import { scrollToSection } from "../utils/scrollToSection";
 
 const Home = () => {
   const router = useRouter();
   const pageTitle = `${SITE_NAME} | ${ROLE_TITLE}`;
-  const description =
-    "Front-End / Full-Stack Developer building production web applications, dashboards, and internal tools with React, Next.js, Vue, and TypeScript.";
+  const ogImage = absoluteUrl(OG_IMAGE_PATH);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -28,7 +34,7 @@ const Home = () => {
     <>
       <Head>
         <title>{pageTitle}</title>
-        <meta name="description" content={description} />
+        <meta name="description" content={SITE_DESCRIPTION} />
         <meta
           name="keywords"
           content="Alfredo Luis Lagamon, Front-End Developer, Full Stack Developer, React, Next.js, Vue.js, TypeScript, Node.js, Dashboard Developer, Internal Tools"
@@ -42,8 +48,8 @@ const Home = () => {
         <meta property="og:url" content={SITE_URL} />
         <meta property="og:site_name" content={`${SITE_NAME} Portfolio`} />
         <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={`${SITE_URL}/images/Profile-Photo.jpg`} />
+        <meta property="og:description" content={SITE_DESCRIPTION} />
+        <meta property="og:image" content={ogImage} />
         <meta property="og:image:width" content="400" />
         <meta property="og:image:height" content="400" />
         <meta property="og:image:alt" content={`${SITE_NAME} - ${ROLE_TITLE}`} />
@@ -52,8 +58,8 @@ const Home = () => {
         <meta name="twitter:creator" content="@alfredolagamon" />
         <meta name="twitter:site" content="@alfredolagamon" />
         <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={`${SITE_URL}/images/Profile-Photo.jpg`} />
+        <meta name="twitter:description" content={SITE_DESCRIPTION} />
+        <meta name="twitter:image" content={ogImage} />
         <meta name="twitter:image:alt" content={`${SITE_NAME} - ${ROLE_TITLE}`} />
 
         <meta name="geo.region" content="PH" />

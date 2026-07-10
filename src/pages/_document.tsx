@@ -1,26 +1,22 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import { SITE_URL } from "../data/site";
+import { getSiteJsonLdGraph } from "../lib/seo";
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {" "}
         <meta charSet="utf-8" />
         <link rel="icon" href="/images/Logo_light.png" media="(prefers-color-scheme: light)" />
         <link rel="icon" href="/images/Logo_dark.png" media="(prefers-color-scheme: dark)" />
         <link rel="icon" href="/images/Logo_light.png" />
-        {/* Viewport optimization */}
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         {/* Theme color with media queries for light/dark mode */}
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
         {/* Performance optimizations */}
-        <link rel="dns-prefetch" href="https://alfredolagamon.com" />
-        <link
-          rel="preconnect"
-          href="https://alfredolagamon.com"
-          crossOrigin="anonymous"
-        />
+        <link rel="dns-prefetch" href={SITE_URL} />
+        <link rel="preconnect" href={SITE_URL} crossOrigin="anonymous" />
         {/* Add preload for critical assets */}
         <link rel="preload" as="image" href="/images/Profile-Photo.jpg" />
         {/* SEO and Social Media Optimization */}
@@ -28,42 +24,11 @@ export default function Document() {
         <meta name="author" content="Alfredo Luis Lagamon" />
         <meta name="creator" content="Alfredo Luis Lagamon" />
         <meta name="publisher" content="Alfredo Luis Lagamon" />
-        {/* Canonical URL - will be overridden by page-specific meta tags */}
-        <link rel="canonical" href="https://alfredolagamon.com" />
-        {/* Structured Data for Person/Developer */}
+        {/* Structured Data — page-specific canonical lives in each page Head */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "@id": "https://alfredolagamon.com/#person",
-              "name": "Alfredo Luis Lagamon",
-              "givenName": "Alfredo Luis",
-              "familyName": "Lagamon",
-              "jobTitle": "Full Stack Developer",
-              "description": "Passionate full-stack developer creating modern web experiences with expertise in React, Next.js, Vue.js, and Node.js",
-              "url": "https://alfredolagamon.com",
-              "image": "https://alfredolagamon.com/images/Profile-Photo.jpg",
-              "sameAs": [
-                "https://github.com/AlfredoLuisLagamon",
-                "https://www.linkedin.com/in/alfredo-luis-lagamon-a70065236/"
-              ],
-              "knowsAbout": [
-                "JavaScript", "TypeScript", "React", "Next.js", "Vue.js", 
-                "Node.js", "Express.js", "MongoDB", "PostgreSQL", "Tailwind CSS"
-              ],
-              "alumniOf": {
-                "@type": "CollegeOrUniversity",
-                "name": "Xavier University - Ateneo de Cagayan",
-                "description": "Bachelor of Science in Computer Science"
-              },
-              "worksFor": {
-                "@type": "Organization",
-                "name": "Restore Masters LLC",
-                "description": "Full-Stack Web Developer"
-              }
-            }),
+            __html: JSON.stringify(getSiteJsonLdGraph()),
           }}
         />
         {/* Prevent theme flash by setting theme before hydration */}

@@ -35,6 +35,7 @@ const ProfileCard: React.FC = () => {
           padding="md"
           hover={false}
           title={profileData.name}
+          titleAs="h1"
           subtitle={
             <div className="flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,6 +53,7 @@ const ProfileCard: React.FC = () => {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={link.name}
                   className="p-3 glass-surface rounded-xl transition-all duration-300 hover:-translate-y-1 text-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {getSocialIcon(link.icon)}
@@ -83,13 +85,19 @@ const ProfileCard: React.FC = () => {
             <span className="text-secondary hidden sm:inline" aria-hidden="true">
               ·
             </span>
-            <button
-              type="button"
-              onClick={() => scrollToSection('contact')}
+            <a
+              href="/#contact"
+              onClick={(e) => {
+                if (typeof window !== 'undefined' && window.location.pathname === '/') {
+                  e.preventDefault();
+                  scrollToSection('contact');
+                  window.history.replaceState(null, '', '#contact');
+                }
+              }}
               className="text-primary hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
             >
               Contact
-            </button>
+            </a>
           </div>
         </ContentCard>
       </div>

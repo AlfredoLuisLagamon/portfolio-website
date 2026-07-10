@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { motion, AnimatePresence } from "framer-motion";
-import Head from "next/head";
+import { Analytics } from "@vercel/analytics/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import ScrollAnimator from "../utils/ScrollAnimator";
@@ -77,10 +77,6 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <ThemeProvider>
       <div className={`${inter.variable} font-sans`}>
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        </Head>
-
         <ErrorBoundary>
           {/* Loading Bar */}
           {isLoading && (
@@ -150,6 +146,8 @@ function MyApp({ Component, pageProps, router }: AppProps) {
             <Footer />
           </div>
         </ErrorBoundary>
+
+        <Analytics />
 
         {/* Add loading bar keyframes */}
         <style jsx>{`

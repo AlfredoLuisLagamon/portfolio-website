@@ -9,6 +9,8 @@ import BaseCard, { BaseCardProps } from './BaseCard';
  */
 export interface ContentCardProps extends Omit<BaseCardProps, 'children'> {
   title?: string;
+  /** Semantic heading level only — styling is identical for h1 and h2 */
+  titleAs?: 'h1' | 'h2';
   subtitle?: string | React.ReactNode;
   children: React.ReactNode;
   titleIcon?: React.ReactNode;
@@ -17,12 +19,15 @@ export interface ContentCardProps extends Omit<BaseCardProps, 'children'> {
 
 const ContentCard: React.FC<ContentCardProps> = ({
   title,
+  titleAs = 'h2',
   subtitle,
   children,
   titleIcon,
   headerAction,
   ...baseCardProps
 }) => {
+  const TitleTag = titleAs;
+
   return (
     <BaseCard {...baseCardProps}>
       {/* Card Header */}
@@ -37,9 +42,9 @@ const ContentCard: React.FC<ContentCardProps> = ({
                   </div>
                 )}
                 {title && (
-                  <h2 className="text-2xl md:text-3xl font-bold text-primary">
+                  <TitleTag className="text-2xl md:text-3xl font-bold text-primary">
                     {title}
-                  </h2>
+                  </TitleTag>
                 )}
               </div>
               {headerAction && (
