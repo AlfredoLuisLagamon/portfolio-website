@@ -160,6 +160,13 @@ body {
   overflow-x: hidden;
 }
 
+/* First-load overlay: lock scroll until LoadingOverlay dismisses */
+html.app-loading,
+html.app-loading body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;

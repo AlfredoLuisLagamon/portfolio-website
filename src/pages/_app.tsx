@@ -11,6 +11,7 @@ import { ThemeProvider } from "../contexts/ThemeContext";
 import ErrorBoundary from "../components/ErrorBoundary";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import LoadingOverlay from "../components/LoadingOverlay";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const nextRouter = useRouter();
@@ -77,6 +78,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <ThemeProvider>
       <div className={`${inter.variable} font-sans`}>
+        <LoadingOverlay />
         <ErrorBoundary>
           {/* Loading Bar */}
           {isLoading && (
