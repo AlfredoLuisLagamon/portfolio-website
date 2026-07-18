@@ -100,9 +100,9 @@ const PageBuilderDemo: React.FC = () => {
       : '';
 
   return (
-    <div className="flex flex-col min-h-[520px] bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100">
       {/* Toolbar */}
-      <div className="flex flex-wrap gap-3 items-center px-4 py-3 border-b border-gray-200/60 dark:border-white/10 bg-gray-50/80 dark:bg-gray-800/50">
+      <div className="shrink-0 flex flex-wrap gap-3 items-center px-4 py-3 border-b border-gray-200/60 dark:border-white/10 bg-gray-50/80 dark:bg-gray-800/50">
         <label className="flex items-center gap-2 text-sm">
           <span className="text-secondary">Microservice</span>
           <select
@@ -161,9 +161,9 @@ const PageBuilderDemo: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col lg:flex-row">
+      <div className="flex min-h-0 flex-1 flex-col lg:flex-row overflow-y-auto overscroll-contain lg:overflow-hidden">
         {/* Structure tree */}
-        <aside className="w-full lg:w-52 border-b lg:border-b-0 lg:border-r border-gray-200/60 dark:border-white/10 p-4">
+        <aside className="w-full lg:w-52 shrink-0 border-b lg:border-b-0 lg:border-r border-gray-200/60 dark:border-white/10 p-4 lg:h-full lg:overflow-y-auto overscroll-contain">
           <h3 className="text-xs font-semibold uppercase tracking-wide text-secondary mb-3">
             Structure
           </h3>
@@ -179,7 +179,7 @@ const PageBuilderDemo: React.FC = () => {
         </aside>
 
         {/* Canvas */}
-        <div className="flex-1 p-4 space-y-3">
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-4 space-y-3">
           <div className={`grid grid-cols-2 gap-3 ${regionClass('stats-row')}`}>
             <div className="rounded-lg border border-gray-200 dark:border-white/10 p-4 bg-white dark:bg-gray-800/50">
               <p className="text-xs text-secondary">Total Calls</p>
@@ -211,7 +211,7 @@ const PageBuilderDemo: React.FC = () => {
         </div>
 
         {/* Inspector + action log */}
-        <aside className="w-full lg:w-56 border-t lg:border-t-0 lg:border-l border-gray-200/60 dark:border-white/10 p-4">
+        <aside className="w-full lg:w-56 shrink-0 border-t lg:border-t-0 lg:border-l border-gray-200/60 dark:border-white/10 p-4 lg:h-full lg:overflow-y-auto overscroll-contain">
           <h3 className="text-xs font-semibold uppercase tracking-wide text-secondary mb-3">
             Inspector
           </h3>
@@ -230,7 +230,7 @@ const PageBuilderDemo: React.FC = () => {
           <h3 className="text-xs font-semibold uppercase tracking-wide text-secondary mb-2">
             Action Log
           </h3>
-          <ul className="space-y-1.5 max-h-40 overflow-y-auto">
+          <ul className="space-y-1.5">
             {actionLog.length === 0 ? (
               <li className="text-xs text-secondary">No actions yet.</li>
             ) : (

@@ -204,6 +204,59 @@ a {
 }
 
 @layer components {
+  /* Page rhythm: major sections */
+  .page-section + .page-section {
+    margin-top: 4rem; /* 64px */
+  }
+
+  #home + .page-section {
+    margin-top: 3rem; /* keep hero → skills balanced */
+  }
+
+  .section-header {
+    margin-bottom: 2rem; /* 32px intro → content */
+  }
+
+  #projects .section-header {
+    margin-bottom: 0; /* first project separator handles the gap */
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold text-primary;
+    margin-bottom: 0.5rem; /* 8px title → description */
+  }
+
+  /* Separator after header and between projects */
+  #projects .project {
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgb(209 213 219 / 0.9);
+  }
+
+  .dark #projects .project {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .demo-frame {
+    @apply relative h-[560px] sm:h-[600px] rounded-2xl border border-gray-200/60 dark:border-white/10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm overflow-hidden shadow-sm;
+  }
+
+  .demo-frame-fade::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2.5rem;
+    pointer-events: none;
+    background: linear-gradient(to top, rgb(249 250 251), transparent);
+    z-index: 1;
+  }
+
+  .dark .demo-frame-fade::after {
+    background: linear-gradient(to top, rgb(11 15 20), transparent);
+  }
+
   /* Align with live section titles: text-2xl md:text-3xl */
   .section-heading {
     @apply text-2xl md:text-3xl font-bold mb-6 relative inline-block;

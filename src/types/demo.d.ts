@@ -99,7 +99,7 @@ export interface WorkflowActivity {
   time: string;
 }
 
-export interface WorkflowTenant {
+export interface WorkflowClient {
   id: string;
   name: string;
   status: string;
@@ -126,7 +126,7 @@ export interface DeveloperWorkflowMock {
   };
   stats: { clients: number; openTasks: number; blocked: number; tickets: number };
   recentActivity: WorkflowActivity[];
-  clients: WorkflowTenant[];
+  clients: WorkflowClient[];
   tasks: WorkflowTask[];
   aiSuggestions: WorkflowAiSuggestion[];
 }

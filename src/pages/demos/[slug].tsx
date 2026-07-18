@@ -91,7 +91,7 @@ export default function DemoPage({
             <h1 className="text-2xl md:text-3xl font-bold text-primary">{demo.title}</h1>
             <p className="text-secondary mt-2">{demo.tagline}</p>
           </div>
-          <div className="rounded-xl border border-gray-200/60 dark:border-white/10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm overflow-hidden shadow-sm">
+          <div className={`demo-frame${slug === 'developer-workflow' ? ' demo-frame-fade' : ''}`}>
             <DemoRenderer slug={slug} />
           </div>
         </div>

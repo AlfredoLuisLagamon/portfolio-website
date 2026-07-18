@@ -5,10 +5,10 @@ const ExperienceSection: React.FC = () => {
   const workExperience = experienceData.filter((item) => item.type === 'work');
 
   return (
-    <section id="experience" className="py-6 md:py-8">
+    <section id="experience" className="page-section">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-page mx-auto mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-primary">Experience</h2>
+        <div className="section-header max-w-page mx-auto">
+          <h2 className="section-title">Experience</h2>
         </div>
 
         <div className="relative max-w-page mx-auto">

@@ -25,8 +25,9 @@ export const demoRegistry: Record<DemoSlug, DemoMeta> = {
   },
   'page-builder': {
     slug: 'page-builder',
-    title: 'Dynamic Page Builder',
-    tagline: 'Data-driven page editor: widgets, modules, and actions',
+    title: 'Dynamic Page Engine',
+    tagline:
+      'Schema-driven UI: Page → Widget → Module → Action config renders interfaces without redeploying pages',
     ecosystem: 'enginezs',
   },
 };

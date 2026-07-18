@@ -63,10 +63,10 @@ const TechStackMarquee: React.FC = () => {
   };
 
   return (
-    <section className="py-6 md:py-8 overflow-hidden relative">
+    <section className="page-section overflow-hidden relative">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-page mx-auto mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-primary">Technical Skills</h2>
+        <div className="section-header max-w-page mx-auto">
+          <h2 className="section-title">Technical Skills</h2>
         </div>
 
         <div className="relative max-w-page mx-auto">

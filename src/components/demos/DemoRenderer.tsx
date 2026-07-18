@@ -16,7 +16,11 @@ interface DemoRendererProps {
 
 const DemoRenderer: React.FC<DemoRendererProps> = ({ slug }) => {
   const DemoComponent = demoComponents[slug];
-  return <DemoComponent />;
+  return (
+    <div className="h-full min-h-0 overflow-hidden">
+      <DemoComponent />
+    </div>
+  );
 };
 
 export default DemoRenderer;

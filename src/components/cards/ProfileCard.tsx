@@ -27,7 +27,7 @@ const ProfileCard: React.FC = () => {
 
 
   return (
-    <section id="home" className="pb-6 md:pb-8">
+    <section id="home">
       <div className="container mx-auto px-4 md:px-6">
         <ContentCard
           className="max-w-page mx-auto"
